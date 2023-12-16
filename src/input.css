@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    * {
+        @apply font-montserrat;
+    }
+    h1 {
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .text-green-linear {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-green-primary to-green-secondary;
+    }
+
+    .text-purple-linear {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-primary to-purple-secondary;
+    }
+
+    .text-abstract {
+        @apply bg-abstract bg-contain bg-clip-text text-transparent;
+    }
+
+    /* STYLING SCROLLBAR */
+
+    ::-webkit-scrollbar {
+        width: 1vw; /* THIS WILL RESET THE DEFAULT SCORLLBAR STYLING */
+    }
+  
+    /* TO STYLE THE SCROLLBAR TRACK */
+    ::-webkit-scrollbar-track {
+        background-color: #ffffff; /* THIS WILL SET THE COLOR OF THE SCROLLBAR TRACK */
+    }
+    
+    /* TO STYLE THE SCROLLBAR THUMB */
+    ::-webkit-scrollbar-thumb {
+        background-image: url("/src/assets/background.svg");
+        border: 0.3vw solid #ffffff;
+        border-radius: 5vw;
+    }
+}

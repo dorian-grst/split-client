@@ -1,0 +1,95 @@
+.auth-submit-button {
+    @apply p-3;
+    @apply rounded-lg;
+    @apply w-80;
+    @apply h-12;
+    @apply bg-black;
+    @apply opacity-90;
+    @apply mix-blend-hard-light;
+    @apply border-2;
+    @apply border-dark-black;
+    @apply transition;
+    @apply duration-300;
+    @apply font-bold;
+    @apply text-white;
+    @apply hover:bg-dark-black;
+    @apply flex;
+    @apply items-center;
+    @apply justify-center;
+}
+
+.auth-navbar-button {
+    @apply px-4;
+    @apply border-white;
+    @apply border;
+    @apply text-white;
+    @apply rounded-md;
+    @apply flex;
+    @apply items-center;
+    @apply justify-center;
+}
+
+.add-modal-button {
+    @apply text-black;
+    @apply flex;
+    @apply w-min;
+    @apply flex-row;
+    @apply justify-center;
+    @apply items-center;
+    @apply gap-[10px];
+    @apply whitespace-nowrap;
+    @apply rounded-lg;
+    @apply border;
+    @apply border-light-gray;
+    @apply p-3;
+    @apply min-w-[400px];
+    @apply w-full;
+    @apply transition;
+    @apply duration-300;
+}
+
+.delete-modal-button {
+    @apply p-3;
+    @apply border;
+    @apply text-black;
+    @apply border-light-gray;
+    @apply rounded-lg;
+    @apply hover:border-red;
+    @apply hover:text-red;
+}
+
+.next {
+    @apply px-3;
+    @apply py-2;
+    @apply text-white;
+    @apply bg-black;
+    @apply rounded-md;
+    @apply leading-none;
+    font-size: 14px;
+}
+
+.cancel {
+    @apply px-3;
+    @apply py-2;
+    @apply border;
+    @apply border-black;
+    @apply text-black;
+    @apply rounded-md;
+    @apply leading-none;
+    font-size: 14px;
+}
+
+.create-transaction-button {
+    @apply p-3;
+    @apply rounded-lg;
+    @apply h-12;
+    @apply text-white;
+    @apply bg-black;
+    @apply rounded-md;
+    @apply leading-none;
+    @apply transition;
+    @apply duration-300;
+    @apply border-2;
+    @apply font-bold;
+    @apply text-white;
+}
