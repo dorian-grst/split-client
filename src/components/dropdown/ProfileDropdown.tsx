@@ -25,9 +25,13 @@ export default function ProfileMenu({ onJoinSplitClick, onCreateSplitClick }: Pr
 
     function handleLogOut() {
         axios
-            .post(VITE_API_ENDPOINT + '/v1/auth/logout', {
-                withCredentials: true,
-            })
+            .post(
+                VITE_API_ENDPOINT + '/v1/auth/logout',
+                {},
+                {
+                    withCredentials: true,
+                }
+            )
             .then(() => {
                 setUser(defaultUser);
                 navigate('/login');
