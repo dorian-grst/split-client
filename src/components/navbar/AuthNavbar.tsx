@@ -1,5 +1,6 @@
 import tw from 'tailwind-styled-components';
 import { Link } from 'react-router-dom';
+import logo from '@/assets/white_logo.svg';
 
 const Container = tw.div`
 absolute
@@ -33,7 +34,7 @@ export default function AuthNavbar({ to, buttonText }: AuthNavbarProps) {
     return (
         <Container>
             <LogoContainer>
-                <Circle />
+                <img src={logo} alt="logo" />
                 <h2 className="font-bold text-white">SPL!T</h2>
             </LogoContainer>
             <Link to={to} className="auth-navbar-button">

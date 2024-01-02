@@ -1,10 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 import ProfileDropdown from '@/components/dropdown/ProfileDropdown';
 import SplitDropdown from '@/components/dropdown/SplitDropdown';
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import BasicModal from '@/components/modal/BasicModal';
 import AddModal from '@/components/modal/AddModal';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import NotificationDropdown from '../dropdown/NotificationDropdown';
+import logo from '@/assets/black_logo.svg';
 
 const Container = tw.div`
 flex
@@ -23,41 +27,84 @@ flex-row
 justify-between
 `;
 
-const links = [
-    { path: '/teamID', text: 'Overview' },
-    { path: '/teamID/equality', text: 'Equality' },
-    { path: '/teamID/settings', text: 'Settings' },
-    { path: '/teamID/account', text: 'Account' },
-];
-
 const actualTeam = 'Team 1';
 
 interface AppNavbarProps {
     section: string;
+    dashboard: boolean;
 }
 
-export default function AppNavbar({ section }: AppNavbarProps) {
+export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
     const [openJoinSplitModal, setJoinSplitModal] = useState(false);
     const [openCreateSplitModal, setCreateSplitModal] = useState(false);
     const [openAddModal, setAddModal] = useState(false);
+    const [groupName, setGroupName] = useState('');
+    const { id } = useParams();
+
+    const links = [
+        { path: '/splits/' + id, text: 'Overview' },
+        { path: '/splits/' + id + '/equality', text: 'Equality' },
+        { path: '/splits/' + id + '/settings', text: 'Settings' },
+        { path: '/account', text: 'Account' },
+    ];
+
+    const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
+
+    const handleInputChange = (value: SetStateAction<string>) => {
+        setGroupName(value);
+    };
+
+    const handleRightButtonClick = () => {
+        setCreateSplitModal(false);
+        setAddModal(true);
+    };
+
+    const handleCreateSplitClick = () => {
+        setAddModal(false);
+        axios
+            .post(
+                VITE_API_ENDPOINT + '/v1/split',
+                { displayName: groupName },
+                {
+                    withCredentials: true,
+                }
+            )
+            .then((response) => {
+                console.log(response);
+                toast.success('Split created successfully');
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error('Error during split creation');
+            });
+        setGroupName('');
+    };
 
     return (
         <>
             <Container>
                 <TopBar>
                     <div className="flex flex-row items-center justify-center gap-10">
-                        <h2 className="font-bold">SPL!T</h2>
-                        <SplitDropdown actualTeam={actualTeam} onJoinSplitClick={() => setJoinSplitModal(true)} onCreateSplitClick={() => setCreateSplitModal(true)} />
+                        <div className="flex items-center justify-center gap-[10px]">
+                            <img src={logo} alt="logo" />
+                            <h2 className="font-bold">SPL!T</h2>
+                        </div>
+                        {!dashboard && <SplitDropdown actualTeam={actualTeam} onJoinSplitClick={() => setJoinSplitModal(true)} onCreateSplitClick={() => setCreateSplitModal(true)} />}
                     </div>
-                    <ProfileDropdown onJoinSplitClick={() => setJoinSplitModal(true)} onCreateSplitClick={() => setCreateSplitModal(true)} />
+                    <div className="flex flex-row items-center justify-center gap-10">
+                        <NotificationDropdown />
+                        <ProfileDropdown onJoinSplitClick={() => setJoinSplitModal(true)} onCreateSplitClick={() => setCreateSplitModal(true)} />
+                    </div>
                 </TopBar>
-                <nav className="flex w-min flex-row gap-[20px]">
-                    {links.map((link, index) => (
-                        <Link key={index} to={link.path} className="font-medium text-gray transition duration-300 hover:text-black">
-                            <h3>{link.text}</h3>
-                        </Link>
-                    ))}
-                </nav>
+                {!dashboard && (
+                    <nav className="flex w-min flex-row gap-[20px]">
+                        {links.map((link, index) => (
+                            <Link key={index} to={link.path} className="text-gray font-medium transition duration-300 hover:text-gray-950">
+                                <h3>{link.text}</h3>
+                            </Link>
+                        ))}
+                    </nav>
+                )}
             </Container>
             <div className="text-abstract border-b border-light-gray px-10 py-7">
                 <h1>{section}</h1>
@@ -87,10 +134,8 @@ export default function AppNavbar({ section }: AppNavbarProps) {
                     textLeftButton="Cancel"
                     textRightButton="Continue"
                     onClickLeftButton={() => setCreateSplitModal(false)}
-                    onClickRightButton={() => {
-                        setCreateSplitModal(false);
-                        setAddModal(true);
-                    }}
+                    onClickRightButton={handleRightButtonClick}
+                    onInputChange={handleInputChange}
                 />
             )}
             {openAddModal && (
@@ -104,7 +149,7 @@ export default function AppNavbar({ section }: AppNavbarProps) {
                     textLeftButton="Cancel"
                     textRightButton="Create the Split"
                     onClickLeftButton={() => setAddModal(false)}
-                    onClickRightButton={() => setAddModal(false)}
+                    onClickRightButton={handleCreateSplitClick}
                 />
             )}
         </>
