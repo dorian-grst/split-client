@@ -9,7 +9,7 @@ interface ButtonMenuProps {
     iconClasses?: string;
 }
 
-const ButtonDropdown = React.forwardRef<HTMLButtonElement, ButtonMenuProps>(({ text, icon, onClick, additionalClasses, textClasses, iconClasses }: ButtonMenuProps, ref) => {
+const ButtonDropdown = React.forwardRef<HTMLButtonElement, ButtonMenuProps>(({ text, icon, onClick, additionalClasses, textClasses, iconClasses }, ref) => {
     const buttonClasses = `flex w-full flex-row items-center justify-between font-medium rounded-lg px-3 py-2 hover:bg-light-gray ${additionalClasses || ''}`;
 
     return (

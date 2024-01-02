@@ -15,12 +15,12 @@ interface ProfileMenuProps {
 
 const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 
-export default function ProfileMenu({ onJoinSplitClick, onCreateSplitClick }: ProfileMenuProps) {
+export default function ProfileDropdown({ onJoinSplitClick, onCreateSplitClick }: ProfileMenuProps) {
     const navigate = useNavigate();
     const { user, setUser } = useContext(AuthContext);
 
     function handleClick() {
-        navigate('/teamID/settings');
+        navigate('/account');
     }
 
     function handleLogOut() {
@@ -35,22 +35,22 @@ export default function ProfileMenu({ onJoinSplitClick, onCreateSplitClick }: Pr
             .then(() => {
                 setUser(defaultUser);
                 navigate('/login');
-                toast.success('Vous avez été déconnecté');
+                toast.success('You have been logged out');
             })
             .catch(() => {
-                toast.error('Erreur lors de la déconnexion');
+                toast.error('Error during logout');
             });
     }
 
     const menuButtons = [
-        { text: 'Account settings', icon: <Cog6ToothIcon />, onClick: handleClick, additionalClasses: 'text-black' },
-        { text: 'Create Split', icon: <PlusIcon />, onClick: onCreateSplitClick, additionalClasses: 'text-black' },
-        { text: 'Join Split', icon: <FingerPrintIcon />, onClick: onJoinSplitClick, additionalClasses: 'text-black' },
-        { text: 'Log out', icon: <ArrowRightOnRectangleIcon />, onClick: handleLogOut, additionalClasses: 'text-red' },
+        { text: 'Account settings', icon: <Cog6ToothIcon />, onClick: handleClick, additionalClasses: 'text-gray-950' },
+        { text: 'Create Split', icon: <PlusIcon />, onClick: onCreateSplitClick, additionalClasses: 'text-gray-950' },
+        { text: 'Join Split', icon: <FingerPrintIcon />, onClick: onJoinSplitClick, additionalClasses: 'text-gray-950' },
+        { text: 'Log out', icon: <ArrowRightOnRectangleIcon />, onClick: handleLogOut, additionalClasses: 'text-red-500' },
     ];
 
     return (
-        <Menu as="div" className="relative">
+        <Menu as="div" className="relative flex items-center justify-center">
             <Menu.Button className="h-[28px] w-[28px] rounded-full bg-abstract bg-cover bg-no-repeat focus:outline-none" />
             <Transition
                 enter="transition duration-100 ease-out"
@@ -62,7 +62,7 @@ export default function ProfileMenu({ onJoinSplitClick, onCreateSplitClick }: Pr
             >
                 <Menu.Items className="absolute right-0 top-4 flex w-min flex-col rounded-lg border border-light-gray bg-white px-2 pb-2 pt-4">
                     <Menu.Item>
-                        <h3 className="px-3 pb-2 font-medium text-black">{user.email}</h3>
+                        <h3 className="px-3 pb-2 font-medium text-gray-950">{user.email}</h3>
                     </Menu.Item>
                     {menuButtons.map((button, index) => (
                         <Menu.Item key={index}>

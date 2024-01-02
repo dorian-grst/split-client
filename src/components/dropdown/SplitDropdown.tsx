@@ -2,17 +2,15 @@ import { MagnifyingGlassIcon, ChevronUpDownIcon, CheckIcon, PlusIcon } from '@he
 import { FingerPrintIcon } from '@heroicons/react/24/outline';
 import ButtonDropdown from '@/components/dropdown/ButtonDropdown';
 import { Menu, Transition } from '@headlessui/react';
+import { useContext, useEffect, useState } from 'react';
+import { SplitContext, findSplitById } from '@/context/SplitProvider';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext, getAllUserSplits } from '@/context/AuthProvider';
 
-const teamList = [
-    {
-        name: 'Team 1',
-        actual: true,
-    },
-    {
-        name: 'Team 2',
-        actual: false,
-    },
-];
+interface Split {
+    id: string;
+    display_name: string;
+}
 
 interface SplitMenuProps {
     actualTeam: string;
@@ -20,11 +18,22 @@ interface SplitMenuProps {
     onCreateSplitClick: () => void;
 }
 
-export default function SplitMenu({ actualTeam, onJoinSplitClick, onCreateSplitClick }: SplitMenuProps) {
+export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick }: SplitMenuProps) {
+    const [response, setResponse] = useState<{ splits: Split[] }>({ splits: [] });
+    const { user } = useContext(AuthContext);
+    const { split, setSplit } = useContext(SplitContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        getAllUserSplits(user.id).then((response) => {
+            setResponse(response);
+        });
+    }, []);
+
     return (
         <Menu as="div" className="relative">
             <Menu.Button className="flex flex-row gap-[10px] rounded-lg px-3 py-2 font-medium transition duration-300 hover:bg-light-gray focus:outline-none">
-                <p>{actualTeam}</p>
+                <p>{split.name}</p>
                 <ChevronUpDownIcon className="h-[20px] w-[20px]" />
             </Menu.Button>
             <Transition
@@ -46,12 +55,21 @@ export default function SplitMenu({ actualTeam, onJoinSplitClick, onCreateSplitC
                         <Menu.Item>
                             <h3 className="px-3 pb-2 font-bold">Teams</h3>
                         </Menu.Item>
-                        {teamList.map((team, index) => (
+                        {response.splits.map((splitItem, index) => (
                             <Menu.Item key={index}>
                                 <ButtonDropdown
-                                    text={team.name}
-                                    icon={team.actual ? <CheckIcon /> : null}
-                                    onClick={function (): void {}}
+                                    text={splitItem.display_name}
+                                    onClick={async () => {
+                                        const splitInfo = await findSplitById(splitItem.id);
+                                        setSplit({
+                                            id: splitInfo[0].id,
+                                            name: splitInfo[0].display_name,
+                                            owner: splitInfo[0].owner_id,
+                                            members: splitInfo[0].users,
+                                            transactions: splitInfo[0].transactions,
+                                        });
+                                        navigate('/splits/' + splitItem.id);
+                                    }}
                                     additionalClasses="flex w-full flex-row items-center justify-between gap-4"
                                 />
                             </Menu.Item>
