@@ -4,8 +4,9 @@
     @apply w-80;
     @apply h-12;
     @apply font-semibold;
-    @apply mix-blend-luminosity;
     @apply focus:outline-none;
+    @apply placeholder:text-gray-300;
+    @apply text-gray-950;
     @apply border-2;
     @apply border-gray-bis;
 }

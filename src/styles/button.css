@@ -3,16 +3,14 @@
     @apply rounded-lg;
     @apply w-80;
     @apply h-12;
-    @apply bg-black;
+    @apply bg-gray-900;
     @apply opacity-90;
     @apply mix-blend-hard-light;
-    @apply border-2;
-    @apply border-dark-black;
     @apply transition;
     @apply duration-300;
     @apply font-bold;
     @apply text-white;
-    @apply hover:bg-dark-black;
+    @apply hover:bg-gray-950;
     @apply flex;
     @apply items-center;
     @apply justify-center;
@@ -30,7 +28,7 @@
 }
 
 .add-modal-button {
-    @apply text-black;
+    @apply text-gray-950;
     @apply flex;
     @apply w-min;
     @apply flex-row;
@@ -51,18 +49,18 @@
 .delete-modal-button {
     @apply p-3;
     @apply border;
-    @apply text-black;
+    @apply text-gray-950;
     @apply border-light-gray;
     @apply rounded-lg;
-    @apply hover:border-red;
-    @apply hover:text-red;
+    @apply hover:border-red-500;
+    @apply hover:text-red-500;
 }
 
 .next {
     @apply px-3;
     @apply py-2;
     @apply text-white;
-    @apply bg-black;
+    @apply bg-gray-950;
     @apply rounded-md;
     @apply leading-none;
     font-size: 14px;
@@ -72,8 +70,8 @@
     @apply px-3;
     @apply py-2;
     @apply border;
-    @apply border-black;
-    @apply text-black;
+    @apply border-gray-950;
+    @apply text-gray-950;
     @apply rounded-md;
     @apply leading-none;
     font-size: 14px;
@@ -84,7 +82,7 @@
     @apply rounded-lg;
     @apply h-12;
     @apply text-white;
-    @apply bg-black;
+    @apply bg-gray-950;
     @apply rounded-md;
     @apply leading-none;
     @apply transition;
