@@ -1,6 +1,7 @@
 import TransactionLayout from '@/components/layout/TransactionLayout';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import TransactionModal from '../modal/TransactionModal';
+import { SplitContext, findAllTransactions } from '@/context/SplitProvider';
 
 const transactionsList = [
     {
@@ -86,6 +87,8 @@ interface Transaction {
 export default function HistoryLayout() {
     const [openTransactionModal, setTransactionModal] = useState(false);
     const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
+    const [transactions, setTransactions] = useState<Transaction[]>([]); // state to store transactions
+    const { split } = useContext(SplitContext);
 
     const openModal = (transaction: Transaction) => {
         setSelectedTransaction(transaction);
@@ -97,19 +100,38 @@ export default function HistoryLayout() {
         setTransactionModal(false);
     };
 
+    useEffect(() => {
+        const fetchTransactions = async () => {
+            try {
+                const result = await findAllTransactions(split.id);
+                setTransactions(result.transactions);
+            } catch (error) {
+                console.error('Error fetching transactions:', error);
+            }
+        };
+
+        fetchTransactions();
+    }, []);
+
+    const isTransactionEmpty = transactions.length === 0;
+
     return (
-        <div className="flex h-min w-full flex-col gap-[20px] rounded-lg border border-light-gray p-10">
+        <div className={`flex w-full flex-col ${isTransactionEmpty ? 'justify-center' : ''} gap-[20px] rounded-lg border border-light-gray p-10`}>
             <div className="flex flex-col">
-                {transactionsList.map((transaction) => (
-                    <TransactionLayout
-                        key={transaction.id}
-                        title={transaction.title}
-                        amount={transaction.amount}
-                        date={transaction.date}
-                        author={transaction.author}
-                        onClick={() => openModal(transaction)}
-                    />
-                ))}
+                {isTransactionEmpty ? (
+                    <p className="text-center text-gray-400">No transactions yet!</p>
+                ) : (
+                    transactions.map((transaction: Transaction) => (
+                        <TransactionLayout
+                            key={transaction.id}
+                            title={transaction.title}
+                            amount={transaction.amount}
+                            date={transaction.date}
+                            author={transaction.author}
+                            onClick={() => openModal(transaction)}
+                        />
+                    ))
+                )}
             </div>
             {selectedTransaction && (
                 <TransactionModal

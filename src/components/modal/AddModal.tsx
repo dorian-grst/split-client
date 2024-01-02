@@ -30,12 +30,12 @@ export default function AddModal({ isOpen, setIsOpen, title, titleClass, label, 
 
     return (
         <Dialog initialFocus={completeButtonRef} open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50 w-min">
-            <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+            <div className="fixed inset-0 bg-gray-950/30" aria-hidden="true" />
             <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
                 <Dialog.Panel className="rounded-lg border border-light-gray bg-white">
                     <div className="flex flex-col gap-[10px] border-b border-light-gray p-8">
                         <h1 className={titleClass}>{title}</h1>
-                        <h3 className="text-black">{label}</h3>
+                        <h3 className="text-gray-950">{label}</h3>
                         {inputs.map((input, index) => (
                             <div key={index} className="flex flex-row gap-[10px]">
                                 <input
