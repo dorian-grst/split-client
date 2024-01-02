@@ -44,7 +44,7 @@
   
     /* TO STYLE THE SCROLLBAR TRACK */
     ::-webkit-scrollbar-track {
-        background-color: #ffffff; /* THIS WILL SET THE COLOR OF THE SCROLLBAR TRACK */
+        background-color: transparent; /* THIS WILL SET THE COLOR OF THE SCROLLBAR TRACK */
     }
     
     /* TO STYLE THE SCROLLBAR THUMB */
