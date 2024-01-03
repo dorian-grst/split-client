@@ -103,17 +103,22 @@ export default function Home() {
             <div className="flex w-[80%] flex-col items-center justify-center">
                 <section id="main" className="pb-32 pt-20">
                     <div className="flex flex-col items-center justify-center">
-                        <nav className="rounded-full border border-white px-6 py-3">
-                            <ul className="flex flex-row gap-6">
-                                {navItems.map((item, index) => (
-                                    <li key={index}>
-                                        <ScrollLink activeClass="active" smooth spy to={item.link}>
-                                            <h3 className="cursor-pointer text-white">{item.text}</h3>
-                                        </ScrollLink>
-                                    </li>
-                                ))}
-                            </ul>
-                        </nav>
+                        <div className="flex flex-row items-center justify-center gap-6 ">
+                            <nav className="rounded-full border border-white px-6 py-3">
+                                <ul className="flex flex-row gap-6">
+                                    {navItems.map((item, index) => (
+                                        <li key={index}>
+                                            <ScrollLink activeClass="active" smooth spy to={item.link}>
+                                                <h3 className="cursor-pointer text-white">{item.text}</h3>
+                                            </ScrollLink>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </nav>
+                            <RouterLink to="/login" className=" rounded-full border border-white bg-white px-6 py-3 text-black mix-blend-screen">
+                                Login
+                            </RouterLink>
+                        </div>
                         <div className="flex flex-row gap-5 pb-8 pt-48">
                             <img src={logo} alt="logo" className="h-[60px] w-[60px]" />
                             <h1 className="text-6xl text-white">SPL!T</h1>

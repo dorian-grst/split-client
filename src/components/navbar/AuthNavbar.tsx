@@ -11,20 +11,6 @@ px-48
 pt-11
 `;
 
-const LogoContainer = tw.div`
-flex
-justify-center
-items-center
-gap-[10px]
-`;
-
-const Circle = tw.div`
-w-[24px]
-h-[24px]
-rounded-full
-bg-white
-`;
-
 interface AuthNavbarProps {
     to: string;
     buttonText: string;
@@ -33,10 +19,10 @@ interface AuthNavbarProps {
 export default function AuthNavbar({ to, buttonText }: AuthNavbarProps) {
     return (
         <Container>
-            <LogoContainer>
+            <Link to="/" className="flex items-center justify-center gap-3">
                 <img src={logo} alt="logo" />
                 <h2 className="font-bold text-white">SPL!T</h2>
-            </LogoContainer>
+            </Link>
             <Link to={to} className="auth-navbar-button">
                 <p>{buttonText}</p>
             </Link>
