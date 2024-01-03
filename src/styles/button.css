@@ -44,6 +44,7 @@
     @apply w-full;
     @apply transition;
     @apply duration-300;
+    @apply focus:border-gray-950;
 }
 
 .delete-modal-button {

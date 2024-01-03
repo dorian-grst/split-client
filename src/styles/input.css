@@ -15,8 +15,8 @@
     @apply border ;
     @apply border-light-gray;
     @apply leading-none;
-    @apply focus:outline-none;
     @apply p-3;
     @apply rounded-lg;
     @apply min-w-[400px];
+    @apply focus:border-gray-950;
 }
