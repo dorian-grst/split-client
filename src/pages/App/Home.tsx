@@ -108,7 +108,7 @@ export default function Home() {
                                 {navItems.map((item, index) => (
                                     <li key={index}>
                                         <ScrollLink activeClass="active" smooth spy to={item.link}>
-                                            <h3 className="text-white">{item.text}</h3>
+                                            <h3 className="cursor-pointer text-white">{item.text}</h3>
                                         </ScrollLink>
                                     </li>
                                 ))}
