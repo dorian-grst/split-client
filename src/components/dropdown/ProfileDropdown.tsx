@@ -52,7 +52,7 @@ export default function ProfileDropdown({ onJoinSplitClick, onCreateSplitClick }
 
     return (
         <Menu as="div" className="relative flex items-center justify-center">
-            <Menu.Button className="h-[28px] w-[28px] rounded-full bg-abstract bg-cover bg-no-repeat focus:outline-none" />
+            <Menu.Button className="h-[28px] w-[28px] rounded-full bg-abstract bg-cover bg-no-repeat" />
             <Transition
                 enter="transition duration-100 ease-out"
                 enterFrom="transform scale-95 opacity-0"
