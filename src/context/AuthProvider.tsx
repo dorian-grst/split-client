@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { PropsWithChildren, createContext, useEffect, useState } from 'react';
+import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Overview from '@/pages/App/Overview';
 import Login from '@/pages/Auth/Login';
 import SignUp from '@/pages/Auth/SignUp';
@@ -9,6 +9,7 @@ import Account from '@/pages/App/Account';
 import { Toaster } from 'react-hot-toast';
 import Dashboard from './pages/App/Dashboard';
 import Home from './pages/App/Home';
+import SplitProvider from './context/SplitProvider';
 
 export default function App() {
     return (
@@ -19,11 +20,11 @@ export default function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
 
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/splits/:id" element={<Overview />} />
-                <Route path="/splits/:id/equality" element={<Equality />} />
-                <Route path="/splits/:id/settings" element={<Settings />} />
-                <Route path="/account" element={<Account />} />
+                <Route path="/dashboard" element={<SplitProvider><Dashboard /></SplitProvider>} />
+                <Route path="/splits/:id" element={<SplitProvider><Overview /></SplitProvider>} />
+                <Route path="/splits/:id/equality" element={<SplitProvider><Equality /></SplitProvider>} />
+                <Route path="/splits/:id/settings" element={<SplitProvider><Settings /></SplitProvider>} />
+                <Route path="/splits/:id/account" element={<SplitProvider><Account /></SplitProvider>} />
 
                 <Route path="/error" element={<Error />} />
             </Routes>

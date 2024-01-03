@@ -2,7 +2,7 @@ import { ArrowRightOnRectangleIcon, PlusIcon } from '@heroicons/react/20/solid';
 import { FingerPrintIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
 import ButtonDropdown from '@/components/dropdown/ButtonDropdown';
 import { Menu, Transition } from '@headlessui/react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext, defaultUser } from '@/context/AuthProvider';
 import { useContext } from 'react';
 import axios from 'axios';
@@ -18,9 +18,10 @@ const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 export default function ProfileDropdown({ onJoinSplitClick, onCreateSplitClick }: ProfileMenuProps) {
     const navigate = useNavigate();
     const { user, setUser } = useContext(AuthContext);
+    const { id } = useParams();
 
     function handleClick() {
-        navigate('/account');
+        navigate('/splits/' + id + '/account');
     }
 
     function handleLogOut() {
