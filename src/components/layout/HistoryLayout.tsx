@@ -2,6 +2,7 @@ import TransactionLayout from '@/components/layout/TransactionLayout';
 import { useContext, useEffect, useState } from 'react';
 import TransactionModal from '../modal/TransactionModal';
 import { SplitContext, findAllTransactions } from '@/context/SplitProvider';
+import { useParams } from 'react-router-dom';
 
 const transactionsList = [
     {
@@ -88,8 +89,7 @@ export default function HistoryLayout() {
     const [openTransactionModal, setTransactionModal] = useState(false);
     const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
     const [transactions, setTransactions] = useState<Transaction[]>([]); // state to store transactions
-    const { split } = useContext(SplitContext);
-
+    const { id } = useParams();
     const openModal = (transaction: Transaction) => {
         setSelectedTransaction(transaction);
         setTransactionModal(true);
@@ -103,8 +103,10 @@ export default function HistoryLayout() {
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
-                const result = await findAllTransactions(split.id);
-                setTransactions(result.transactions);
+                if (id) {
+                    const result = await findAllTransactions(id);
+                    setTransactions(result.transactions);
+                }
             } catch (error) {
                 console.error('Error fetching transactions:', error);
             }

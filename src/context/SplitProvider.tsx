@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { PropsWithChildren, createContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 
@@ -30,6 +31,9 @@ export const findSplitById = async (splitId: string) => {
 };
 
 export const findAllTransactions = async (splitId: string) => {
+    if (!splitId) {
+        throw new Error('splitId is not defined');
+    }
     try {
         const response = await axios.get(VITE_API_ENDPOINT + '/v1/split/' + splitId + '/transactions', {
             withCredentials: true,
@@ -41,7 +45,7 @@ export const findAllTransactions = async (splitId: string) => {
 };
 
 export const defaultSplit: Split = {
-    id: '2c303584-b576-4a00-9097-9d9d8c218f03',
+    id: '',
     name: '',
     owner: '',
     members: [],
@@ -58,17 +62,25 @@ export const SplitContext = createContext<{
 
 export default function SplitProvider({ children }: PropsWithChildren<{}>) {
     const [split, setSplit] = useState<Split>(defaultSplit);
+    const { id } = useParams();
 
     useEffect(() => {
         async function fetchSplitInfos() {
-            const splitInfo = await findSplitById(split.id);
-            setSplit({
-                id: splitInfo[0].id,
-                name: splitInfo[0].display_name,
-                owner: splitInfo[0].owner_id,
-                members: splitInfo[0].users,
-                transactions: splitInfo[0].transactions,
-            });
+            if (id) {
+                try {
+                    const splitInfo = await findSplitById(id);
+                    setSplit({
+                        id: splitInfo[0].id,
+                        name: splitInfo[0].display_name,
+                        owner: splitInfo[0].owner_id,
+                        members: splitInfo[0].users,
+                        transactions: splitInfo[0].transactions,
+                    });
+                } catch (error) {
+                    console.error('Error fetching split information:', error);
+                    // Gérer l'erreur, par exemple rediriger vers une page d'erreur.
+                }
+            }
         }
         fetchSplitInfos();
     }, []);

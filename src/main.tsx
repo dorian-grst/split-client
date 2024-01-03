@@ -4,16 +4,13 @@ import App from './app.tsx';
 import './input.css';
 import AuthProvider from './context/AuthProvider.tsx';
 import { BrowserRouter } from 'react-router-dom';
-import SplitProvider from './context/SplitProvider.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <SplitProvider>
+        <BrowserRouter>
             <AuthProvider>
-                <BrowserRouter>
-                    <App />
-                </BrowserRouter>
+                <App />
             </AuthProvider>
-        </SplitProvider>
+        </BrowserRouter>
     </React.StrictMode>
 );

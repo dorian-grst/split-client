@@ -45,7 +45,7 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
         { path: '/splits/' + id, text: 'Overview' },
         { path: '/splits/' + id + '/equality', text: 'Equality' },
         { path: '/splits/' + id + '/settings', text: 'Settings' },
-        { path: '/account', text: 'Account' },
+        { path: '/splits/' + id + '/account', text: 'Account' },
     ];
 
     const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;

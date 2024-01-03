@@ -42,7 +42,7 @@ export default function SignUp() {
             .then(async () => {
                 const userInfos = await getUserInfos();
                 setUser(userInfos);
-                navigate('/split/:id');
+                navigate('/dashboard');
             })
             .catch((error) => {
                 console.log(error.response.data);
