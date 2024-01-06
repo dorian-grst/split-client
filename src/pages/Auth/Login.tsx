@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 type UserSubmitForm = {
     email: string;
@@ -43,6 +44,7 @@ export default function Login() {
                 navigate('/dashboard');
             })
             .catch((error) => {
+                toast.error('Error during login');
                 throw error;
             });
     };

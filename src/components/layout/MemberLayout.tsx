@@ -45,14 +45,10 @@ export default function MemberLayout() {
                     setIsOpen={closeAddModalHandler}
                     title="Add member(s)"
                     titleClass="text-purple-linear"
-                    label="Add members to your Split!"
-                    placeholder="dorian.grasset.contact@gmail.com"
-                    textLeftButton="Cancel"
-                    textRightButton="Add member(s)"
+                    label="Generate & share the invite code to one friend !"
+                    placeholder="split/invites/token"
+                    textLeftButton="Close"
                     onClickLeftButton={closeAddModalHandler}
-                    onClickRightButton={() => {
-                        closeAddModalHandler();
-                    }}
                 />
             )}
         </div>
