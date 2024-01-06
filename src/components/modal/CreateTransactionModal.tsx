@@ -3,8 +3,6 @@ import InputGroupModal from './InputGroupModal';
 import { Fragment, useContext, useState } from 'react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { Member, SplitContext } from '@/context/SplitProvider';
-import axios from 'axios';
-import { AuthContext } from '@/context/AuthProvider';
 
 interface CreateTransactionModalProps {
     isOpen: boolean;
@@ -15,8 +13,6 @@ interface CreateTransactionModalProps {
     onClickLeftButton?: () => void;
     onClickRightButton: (selected: Member | undefined) => void; // Mettez à jour la signature
 }
-
-const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 
 export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButton, textRightButton, selected: selectedValue, onClickLeftButton, onClickRightButton }: CreateTransactionModalProps) {
     const { split } = useContext(SplitContext);
@@ -83,8 +79,15 @@ export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButt
                                 {split.members ? (
                                     split.members.map((member) => (
                                         <div className="flex flex-row items-center gap-2" key={member.id}>
-                                            <input type="checkbox" name="payed_for" value={member.id} data-member-id={member.id} className="border-light-gray" />
-                                            <label htmlFor="payed_for">{member.display_name ? member.display_name : member.email}</label>
+                                            <input
+                                                type="checkbox"
+                                                id={`payed_for_${member.id}`}
+                                                name="payed_for"
+                                                value={member.id}
+                                                data-member-id={member.id}
+                                                className="border-light-gray"
+                                            />
+                                            <label htmlFor={`payed_for_${member.id}`}>{member.display_name ? member.display_name : member.email}</label>
                                         </div>
                                     ))
                                 ) : (

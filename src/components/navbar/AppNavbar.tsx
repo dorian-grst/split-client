@@ -120,7 +120,9 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
                     textLeftButton="Cancel"
                     textRightButton="Join the Split"
                     onClickLeftButton={() => setJoinSplitModal(false)}
-                    onClickRightButton={() => setJoinSplitModal(false)}
+                    onClickRightButton={() => {
+                        setJoinSplitModal(false);
+                    }}
                 />
             )}
             {openCreateSplitModal && (

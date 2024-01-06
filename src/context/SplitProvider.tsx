@@ -31,13 +31,40 @@ export const findSplitById = async (splitId: string) => {
 };
 
 export const findAllTransactions = async (splitId: string) => {
-    if (!splitId) {
-        throw new Error('splitId is not defined');
-    }
     try {
         const response = await axios.get(VITE_API_ENDPOINT + '/v1/split/' + splitId + '/transactions', {
             withCredentials: true,
         });
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const generateInvitation = async (splitId: string) => {
+    try {
+        const response = await axios.post(
+            VITE_API_ENDPOINT + '/v1/split/' + splitId + '/invitation',
+            { splitId: splitId },
+            {
+                withCredentials: true,
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const joinSplit = async (token: string) => {
+    try {
+        const response = await axios.post(
+            VITE_API_ENDPOINT + '/v1/split/join',
+            { token: token },
+            {
+                withCredentials: true,
+            }
+        );
         return response.data;
     } catch (error) {
         console.error(error);

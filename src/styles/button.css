@@ -27,7 +27,7 @@
     @apply justify-center;
 }
 
-.add-modal-button {
+.generate-modal-button {
     @apply text-gray-950;
     @apply flex;
     @apply w-min;
@@ -56,29 +56,36 @@
     @apply rounded-lg;
     @apply transition;
     @apply duration-300;
-    @apply hover:border-red-500;
-    @apply hover:text-red-500;
+    @apply hover:border-green-primary;
+    @apply hover:text-green-primary;
 }
 
 .next {
     @apply px-3;
     @apply py-2;
     @apply text-white;
-    @apply bg-gray-950;
+    @apply bg-gray-900;
+    @apply transition;
+    @apply duration-300;
+    @apply hover:bg-gray-950;
     @apply rounded-md;
     @apply leading-none;
-    font-size: 14px;
+    @apply text-[14px];
 }
 
 .cancel {
     @apply px-3;
     @apply py-2;
     @apply border;
-    @apply border-gray-950;
-    @apply text-gray-950;
+    @apply border-gray-900;
+    @apply text-gray-900;
     @apply rounded-md;
     @apply leading-none;
-    font-size: 14px;
+    @apply text-[14px];
+    @apply transition;
+    @apply duration-300;
+    @apply hover:border-gray-950;
+    @apply hover:text-gray-950;
 }
 
 .create-transaction-button {
@@ -86,7 +93,8 @@
     @apply rounded-lg;
     @apply h-12;
     @apply text-white;
-    @apply bg-gray-950;
+    @apply bg-gray-900;
+    @apply hover:bg-gray-950;
     @apply rounded-md;
     @apply leading-none;
     @apply transition;
