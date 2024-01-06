@@ -27,8 +27,6 @@ flex-row
 justify-between
 `;
 
-const actualTeam = 'Team 1';
-
 interface AppNavbarProps {
     section: string;
     dashboard: boolean;
@@ -39,6 +37,7 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
     const [openCreateSplitModal, setCreateSplitModal] = useState(false);
     const [openAddModal, setAddModal] = useState(false);
     const [groupName, setGroupName] = useState('');
+    const [refreshSplitDropdown, setRefreshSplitDropdown] = useState(false);
     const { id } = useParams();
 
     const links = [
@@ -71,13 +70,14 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
             )
             .then((response) => {
                 console.log(response);
+                setGroupName('');
+                setRefreshSplitDropdown((prevState) => !prevState);
                 toast.success('Split created successfully');
             })
             .catch((error) => {
                 console.log(error);
                 toast.error('Error during split creation');
             });
-        setGroupName('');
     };
 
     return (
@@ -89,7 +89,7 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
                             <img src={logo} alt="logo" />
                             <h2 className="font-bold">SPL!T</h2>
                         </div>
-                        {!dashboard && <SplitDropdown actualTeam={actualTeam} onJoinSplitClick={() => setJoinSplitModal(true)} onCreateSplitClick={() => setCreateSplitModal(true)} />}
+                        {!dashboard && <SplitDropdown onJoinSplitClick={() => setJoinSplitModal(true)} onCreateSplitClick={() => setCreateSplitModal(true)} refresh={refreshSplitDropdown} />}
                     </div>
                     <div className="flex flex-row items-center justify-center gap-10">
                         <NotificationDropdown />
