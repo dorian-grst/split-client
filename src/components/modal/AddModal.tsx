@@ -18,7 +18,7 @@ interface ModalProps {
 
 export default function AddModal({ isOpen, setIsOpen, title, titleClass, label, placeholder, textLeftButton, textRightButton, onClickLeftButton, onClickRightButton }: ModalProps) {
     let completeButtonRef = useRef(null);
-    const [inputs, setInputs] = useState<string[]>(['']); // Initial input
+    const [inputs, setInputs] = useState<string[]>(['']);
 
     const handleAddMemberClick = () => {
         setInputs((prevInputs) => [...prevInputs, '']);

@@ -39,6 +39,7 @@
     @apply rounded-lg;
     @apply border;
     @apply border-light-gray;
+    @apply hover:border-gray-950;
     @apply p-3;
     @apply min-w-[400px];
     @apply w-full;
@@ -53,6 +54,8 @@
     @apply text-gray-950;
     @apply border-light-gray;
     @apply rounded-lg;
+    @apply transition;
+    @apply duration-300;
     @apply hover:border-red-500;
     @apply hover:text-red-500;
 }
