@@ -4,37 +4,23 @@ import { Fragment, useContext, useState } from 'react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { Member, SplitContext } from '@/context/SplitProvider';
 import axios from 'axios';
+import { AuthContext } from '@/context/AuthProvider';
 
 interface CreateTransactionModalProps {
     isOpen: boolean;
     setIsOpen: (value: boolean) => void;
     textLeftButton: string;
     textRightButton: string;
+    selected: Member | undefined;
     onClickLeftButton?: () => void;
-    onClickRightButton?: () => void;
+    onClickRightButton: (selected: Member | undefined) => void; // Mettez à jour la signature
 }
 
 const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 
-type TransactionSubmitForm = {
-    name: string;
-    amount: string;
-    payed_by: string;
-};
-
-export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButton, textRightButton, onClickLeftButton, onClickRightButton }: CreateTransactionModalProps) {
+export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButton, textRightButton, selected: selectedValue, onClickLeftButton, onClickRightButton }: CreateTransactionModalProps) {
     const { split } = useContext(SplitContext);
     const [selected, setSelected] = useState<Member | undefined>(split?.members?.[0]);
-
-    const onSubmit = (data: TransactionSubmitForm) => {
-        axios
-            .post(VITE_API_ENDPOINT + '/v1/transaction', data, {
-                withCredentials: true,
-            })
-            .catch((error) => {
-                console.log(error.response.data);
-            });
-    };
 
     return (
         <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50 w-min">
@@ -42,19 +28,21 @@ export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButt
             <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
                 <Dialog.Panel className="rounded-lg border border-light-gray bg-white">
                     <form
-                        method="POST"
-                        onSubmit={() => {}}
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            onClickRightButton(selected);
+                        }}
                     >
                         <div className="flex flex-col gap-[20px] border-b border-light-gray p-8">
                             <h1 className="text-purple-linear">Create transaction</h1>
-                            <InputGroupModal label="Name" placeholder="Travel" />
-                            <InputGroupModal label="Amount" placeholder="100 €" />
+                            <InputGroupModal name="name" label="Name" placeholder="Travel" />
+                            <InputGroupModal name="amount" label="Amount" placeholder="100 €" />
                             <div className="flex flex-col gap-2">
                                 <p className="text-gray-950">Payed by</p>
                                 <Listbox value={selected} onChange={setSelected}>
                                     <div className="relative mt-1">
                                         <Listbox.Button className="form-input w-[400px] cursor-default rounded-lg bg-white text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-green-300 sm:text-sm">
-                                            <span className="block truncate">{selected?.display_name}</span>
+                                            <span className="block truncate">{selected?.display_name ? selected?.display_name : selected?.email}</span>
                                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                                 <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                                             </span>
@@ -72,7 +60,9 @@ export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButt
                                                         >
                                                             {({ selected }) => (
                                                                 <>
-                                                                    <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{member.display_name}</span>
+                                                                    <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                                                                        {member.display_name ? member.display_name : member.email}
+                                                                    </span>
                                                                     {selected ? (
                                                                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-green-600">
                                                                             <CheckIcon className="h-5 w-5" aria-hidden="true" />
@@ -87,6 +77,19 @@ export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButt
                                         </Transition>
                                     </div>
                                 </Listbox>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <p className="text-gray-950">Payed for</p>
+                                {split.members ? (
+                                    split.members.map((member) => (
+                                        <div className="flex flex-row items-center gap-2" key={member.id}>
+                                            <input type="checkbox" name="payed_for" value={member.id} data-member-id={member.id} className="border-light-gray" />
+                                            <label htmlFor="payed_for">{member.display_name ? member.display_name : member.email}</label>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p>No members available</p>
+                                )}
                             </div>
                         </div>
                         <div className="flex flex-row justify-between p-8">

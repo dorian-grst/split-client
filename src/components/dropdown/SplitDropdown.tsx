@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon, ChevronUpDownIcon, CheckIcon, PlusIcon } from '@heroicons/react/20/solid';
+import { MagnifyingGlassIcon, ChevronUpDownIcon, PlusIcon } from '@heroicons/react/20/solid';
 import { FingerPrintIcon } from '@heroicons/react/24/outline';
 import ButtonDropdown from '@/components/dropdown/ButtonDropdown';
 import { Menu, Transition } from '@headlessui/react';
@@ -13,12 +13,12 @@ interface Split {
 }
 
 interface SplitMenuProps {
-    actualTeam: string;
     onJoinSplitClick: () => void;
     onCreateSplitClick: () => void;
+    refresh: boolean;
 }
 
-export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick }: SplitMenuProps) {
+export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick, refresh }: SplitMenuProps) {
     const [response, setResponse] = useState<{ splits: Split[] }>({ splits: [] });
     const { user } = useContext(AuthContext);
     const { split, setSplit } = useContext(SplitContext);
@@ -28,7 +28,8 @@ export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick }: 
         getAllUserSplits(user.id).then((response) => {
             setResponse(response);
         });
-    }, []);
+
+    }, [refresh]);
 
     return (
         <Menu as="div" className="relative">
