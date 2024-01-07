@@ -48,7 +48,7 @@
     @apply focus:border-gray-950;
 }
 
-.delete-modal-button {
+.copy-modal-button {
     @apply p-3;
     @apply border;
     @apply text-gray-950;
@@ -58,6 +58,18 @@
     @apply duration-300;
     @apply hover:border-green-primary;
     @apply hover:text-green-primary;
+}
+
+.delete-modal-button {
+    @apply p-3;
+    @apply border;
+    @apply text-gray-950;
+    @apply border-light-gray;
+    @apply rounded-lg;
+    @apply transition;
+    @apply duration-300;
+    @apply hover:border-purple-primary;
+    @apply hover:text-purple-primary;
 }
 
 .next {

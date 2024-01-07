@@ -28,13 +28,12 @@ export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick, re
         getAllUserSplits(user.id).then((response) => {
             setResponse(response);
         });
-
     }, [refresh]);
 
     return (
         <Menu as="div" className="relative">
             <Menu.Button className="flex flex-row gap-[10px] rounded-lg px-3 py-2 font-medium transition duration-300 hover:bg-light-gray">
-                <p>{split.name}</p>
+                <p>{split.display_name}</p>
                 <ChevronUpDownIcon className="h-[20px] w-[20px]" />
             </Menu.Button>
             <Transition
@@ -64,7 +63,7 @@ export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick, re
                                         const splitInfo = await findSplitById(splitItem.id);
                                         setSplit({
                                             id: splitInfo[0].id,
-                                            name: splitInfo[0].display_name,
+                                            display_name: splitInfo[0].display_name,
                                             owner: splitInfo[0].owner_id,
                                             members: splitInfo[0].users,
                                             transactions: splitInfo[0].transactions,

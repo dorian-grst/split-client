@@ -9,7 +9,7 @@ import { useContext, useState } from 'react';
 const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 
 interface LeftMenuLayoutProps {
-    refreshHistory: () => void;
+    refreshHistory?: () => void;
 }
 
 export default function LeftMenuLayout({ refreshHistory }: LeftMenuLayoutProps) {
@@ -49,7 +49,7 @@ export default function LeftMenuLayout({ refreshHistory }: LeftMenuLayoutProps) 
             .then(() => {
                 setOpenCreateTransactionModal(false);
                 setSelectedMember(selected);
-                refreshHistory();
+                if (refreshHistory) refreshHistory();
             })
             .catch((error) => {
                 console.log(error.response.data);

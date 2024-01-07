@@ -44,7 +44,6 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
         { path: '/splits/' + id, text: 'Overview' },
         { path: '/splits/' + id + '/equality', text: 'Equality' },
         { path: '/splits/' + id + '/settings', text: 'Settings' },
-        { path: '/splits/' + id + '/account', text: 'Account' },
     ];
 
     const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
@@ -85,10 +84,10 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
             <Container>
                 <TopBar>
                     <div className="flex flex-row items-center justify-center gap-10">
-                        <div className="flex items-center justify-center gap-[10px]">
+                        <Link to="/" className="flex items-center justify-center gap-[10px]">
                             <img src={logo} alt="logo" />
                             <h2 className="font-bold">SPL!T</h2>
-                        </div>
+                        </Link>
                         {!dashboard && <SplitDropdown onJoinSplitClick={() => setJoinSplitModal(true)} onCreateSplitClick={() => setCreateSplitModal(true)} refresh={refreshSplitDropdown} />}
                     </div>
                     <div className="flex flex-row items-center justify-center gap-10">

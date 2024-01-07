@@ -20,11 +20,46 @@ export default function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
 
-                <Route path="/dashboard" element={<SplitProvider><Dashboard /></SplitProvider>} />
-                <Route path="/splits/:id" element={<SplitProvider><Overview /></SplitProvider>} />
-                <Route path="/splits/:id/equality" element={<SplitProvider><Equality /></SplitProvider>} />
-                <Route path="/splits/:id/settings" element={<SplitProvider><Settings /></SplitProvider>} />
-                <Route path="/splits/:id/account" element={<SplitProvider><Account /></SplitProvider>} />
+                <Route
+                    path="/dashboard"
+                    element={
+                        <SplitProvider>
+                            <Dashboard />
+                        </SplitProvider>
+                    }
+                />
+                <Route
+                    path="/splits/:id"
+                    element={
+                        <SplitProvider>
+                            <Overview />
+                        </SplitProvider>
+                    }
+                />
+                <Route
+                    path="/splits/:id/equality"
+                    element={
+                        <SplitProvider>
+                            <Equality />
+                        </SplitProvider>
+                    }
+                />
+                <Route
+                    path="/splits/:id/settings"
+                    element={
+                        <SplitProvider>
+                            <Settings />
+                        </SplitProvider>
+                    }
+                />
+                <Route
+                    path="/account"
+                    element={
+                        <SplitProvider>
+                            <Account />
+                        </SplitProvider>
+                    }
+                />
 
                 <Route path="/error" element={<Error />} />
             </Routes>
