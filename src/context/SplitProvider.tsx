@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { PropsWithChildren, createContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 
 const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
@@ -13,7 +14,7 @@ export interface Member {
 
 interface Split {
     id: string;
-    name: string;
+    display_name: string;
     owner: string;
     members: Member[];
     transactions: string[];
@@ -41,6 +42,34 @@ export const findAllTransactions = async (splitId: string) => {
     }
 };
 
+export const findAllInvitations = async (splitId: string) => {
+    try {
+        const response = await axios.get(VITE_API_ENDPOINT + '/v1/split/' + splitId + '/invitations', {
+            withCredentials: true,
+        });
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const updateSplitDisplayName = async (newDisplayName: string, splitId: string) => {
+    try {
+        const response = await axios.patch(
+            VITE_API_ENDPOINT + '/v1/split/' + splitId,
+            {
+                displayName: newDisplayName,
+            },
+            { withCredentials: true }
+        );
+        toast.success('Display name updated!');
+        console.log(response.data);
+    } catch (error) {
+        toast.error('An error occured while updating your display name.');
+        console.error(error);
+    }
+};
+
 export const generateInvitation = async (splitId: string) => {
     try {
         const response = await axios.post(
@@ -50,6 +79,28 @@ export const generateInvitation = async (splitId: string) => {
                 withCredentials: true,
             }
         );
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const getInvitationsBySplitId = async (splitId: string) => {
+    try {
+        const response = await axios.get(VITE_API_ENDPOINT + '/v1/split/' + splitId + '/invitations', {
+            withCredentials: true,
+        });
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const deleteInvitationByToken = async (splitId: string, token: string) => {
+    try {
+        const response = await axios.delete(VITE_API_ENDPOINT + '/v1/split/' + splitId + '/invitation/' + token, {
+            withCredentials: true,
+        });
         return response.data;
     } catch (error) {
         console.error(error);
@@ -73,7 +124,7 @@ export const joinSplit = async (token: string) => {
 
 export const defaultSplit: Split = {
     id: '',
-    name: '',
+    display_name: '',
     owner: '',
     members: [],
     transactions: [],
@@ -98,7 +149,7 @@ export default function SplitProvider({ children }: PropsWithChildren<{}>) {
                     const splitInfo = await findSplitById(id);
                     setSplit({
                         id: splitInfo[0].id,
-                        name: splitInfo[0].display_name,
+                        display_name: splitInfo[0].display_name,
                         owner: splitInfo[0].owner_id,
                         members: splitInfo[0].users,
                         transactions: splitInfo[0].transactions,

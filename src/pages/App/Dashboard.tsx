@@ -104,7 +104,7 @@ export default function Dashboard() {
                                 const splitInfo = await findSplitById(splitItem.id);
                                 setSplit({
                                     id: splitInfo[0].id,
-                                    name: splitInfo[0].display_name,
+                                    display_name: splitInfo[0].display_name,
                                     owner: splitInfo[0].owner_id,
                                     members: splitInfo[0].users,
                                     transactions: splitInfo[0].transactions,

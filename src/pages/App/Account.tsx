@@ -1,12 +1,11 @@
 import BasicSetting from '@/components/layout/BasicSetting';
 import InputGroupModal from '@/components/modal/InputGroupModal';
 import AppNavbar from '@/components/navbar/AppNavbar';
-import { AuthContext, updateDisplayName } from '@/context/AuthProvider';
+import { AuthContext, updateUserDisplayName } from '@/context/AuthProvider';
 import { useContext, useEffect, useState } from 'react';
 
 export default function Account() {
     const { user } = useContext(AuthContext);
-
     const [newDisplayName, setNewDisplayName] = useState('');
 
     useEffect(() => {
@@ -18,12 +17,12 @@ export default function Account() {
     };
 
     const handleSaveButtonClick = () => {
-        updateDisplayName(newDisplayName, user.id);
+        updateUserDisplayName(newDisplayName, user.id);
     };
 
     return (
         <div>
-            <AppNavbar section="Account" dashboard={false}/>
+            <AppNavbar section="Account" dashboard={true} />
             <div className="flex flex-row gap-10 px-[20%] py-10">
                 <div className="flex w-full flex-col gap-10">
                     <BasicSetting title="Display name" textButton="Save" onClick={handleSaveButtonClick}>

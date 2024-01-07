@@ -16,7 +16,7 @@ export const defaultUser: User = {
     display_name: '',
 };
 
-export const updateDisplayName = async (newDisplayName: string, userId: string) => {
+export const updateUserDisplayName = async (newDisplayName: string, userId: string) => {
     try {
         const response = await axios.patch(
             VITE_API_ENDPOINT + '/v1/user/' + userId,
