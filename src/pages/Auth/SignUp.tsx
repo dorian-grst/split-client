@@ -5,10 +5,11 @@ import AuthNavbar from '@/components/navbar/AuthNavbar';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
-import { AuthContext, getUserInfos } from '@/context/AuthProvider';
+import { AuthContext } from '@/context/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { getUserInfos } from '@/queries/user.queries';
 
 const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 

@@ -1,8 +1,9 @@
-import AddModal from '@/components/modal/AddModal';
 import BasicModal from '@/components/modal/BasicModal';
 import AppNavbar from '@/components/navbar/AppNavbar';
-import { AuthContext, getAllUserSplits } from '@/context/AuthProvider';
-import { SplitContext, findSplitById, joinSplit } from '@/context/SplitProvider';
+import { AuthContext } from '@/context/AuthProvider';
+import { SplitContext } from '@/context/SplitProvider';
+import { findSplitById, joinSplit } from '@/queries/split.queries';
+import { getAllSplitUsers } from '@/queries/user.queries';
 import axios from 'axios';
 import { SetStateAction, useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -36,7 +37,6 @@ export default function Dashboard() {
         joinSplit(joinSplitToken).then(() => {
             setJoinSplitModal(false);
             setRefreshSplitList((prevState) => !prevState);
-            toast.success('Split joined successfully');
         });
     };
 
@@ -67,7 +67,7 @@ export default function Dashboard() {
     const { setSplit } = useContext(SplitContext);
     const navigate = useNavigate();
     useEffect(() => {
-        getAllUserSplits(user.id).then((response) => {
+        getAllSplitUsers(user.id).then((response) => {
             setResponse(response);
         });
     }, [refreshSplitList]);

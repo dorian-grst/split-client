@@ -3,7 +3,8 @@ import LeftMenuLayout from '@/components/layout/LeftMenuLayout';
 import BasicSetting from '@/components/layout/BasicSetting';
 import InputGroupModal from '@/components/modal/InputGroupModal';
 import { useContext, useEffect, useState } from 'react';
-import { SplitContext, updateSplitDisplayName } from '@/context/SplitProvider';
+import { SplitContext } from '@/context/SplitProvider';
+import { updateSplitDisplayName } from '@/queries/split.queries';
 
 export default function Settings() {
     const { split } = useContext(SplitContext);

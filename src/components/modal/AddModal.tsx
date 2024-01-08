@@ -3,8 +3,8 @@ import { DocumentDuplicateIcon, ArrowPathIcon, TrashIcon } from '@heroicons/reac
 import '@/styles/input.css';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { deleteInvitationByToken, generateInvitation, getInvitationsBySplitId } from '@/context/SplitProvider';
 import { useParams } from 'react-router-dom';
+import { deleteInvitationByToken, generateInvitation, getInvitationsBySplitId } from '@/queries/split.queries';
 
 interface ModalProps {
     isOpen: boolean;

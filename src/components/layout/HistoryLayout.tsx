@@ -1,8 +1,8 @@
 import TransactionLayout from '@/components/layout/TransactionLayout';
 import { useEffect, useState } from 'react';
 import TransactionModal from '../modal/TransactionModal';
-import { findAllTransactions } from '@/context/SplitProvider';
 import { useParams } from 'react-router-dom';
+import { findAllTransactions } from '@/queries/split.queries';
 
 interface Transaction {
     id: number;
