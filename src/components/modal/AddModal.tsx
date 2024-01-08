@@ -50,14 +50,11 @@ export default function AddModal({ isOpen, setIsOpen, title, titleClass, label, 
         }
     };
 
-    const handleDeleteInvitation = async (token: string) => {
+    const handleDeleteInvitation = (token: string) => {
         if (id) {
-            try {
-                await deleteInvitationByToken(id, token);
+            deleteInvitationByToken(id, token).then(() => {
                 setRefreshEffect((prev) => !prev);
-            } catch (error) {
-                console.error('Error deleting invitation:', error);
-            }
+            });
         }
     };
 

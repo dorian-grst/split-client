@@ -2,11 +2,9 @@ import BasicModal from '@/components/modal/BasicModal';
 import AppNavbar from '@/components/navbar/AppNavbar';
 import { AuthContext } from '@/context/AuthProvider';
 import { SplitContext } from '@/context/SplitProvider';
-import { findSplitById, joinSplit } from '@/queries/split.queries';
+import { createSplit, findSplitById, joinSplit } from '@/queries/split.queries';
 import { getAllSplitUsers } from '@/queries/user.queries';
-import axios from 'axios';
 import { SetStateAction, useContext, useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 interface Split {
@@ -20,8 +18,6 @@ export default function Dashboard() {
     const [openCreateSplitModal, setCreateSplitModal] = useState(false);
     const [groupName, setGroupName] = useState('');
     const [refreshSplitList, setRefreshSplitList] = useState(false);
-
-    const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 
     const handleInputChange = (value: SetStateAction<string>) => {
         setGroupName(value);
@@ -41,25 +37,21 @@ export default function Dashboard() {
     };
 
     const handleCreateSplitClick = () => {
-        axios
-            .post(
-                VITE_API_ENDPOINT + '/v1/split',
-                { displayName: groupName },
-                {
-                    withCredentials: true,
-                }
-            )
-            .then((response) => {
-                console.log(response);
-                setGroupName('');
-                setCreateSplitModal(false);
-                setRefreshSplitList((prevState) => !prevState);
-                toast.success('Split created successfully');
-            })
-            .catch((error) => {
-                console.log(error);
-                toast.error('Error during split creation');
+        createSplit(groupName).then(async (data) => {
+            setRefreshSplitList((prevState) => !prevState);
+            setCreateSplitModal(false);
+            setGroupName('');
+            const splitInfo = await findSplitById(data.split.id);
+            setSplit({
+                id: splitInfo[0].id,
+                display_name: splitInfo[0].display_name,
+                description: splitInfo[0].description,
+                owner: splitInfo[0].owner_id,
+                members: splitInfo[0].users,
+                transactions: splitInfo[0].transactions,
             });
+            navigate('/splits/' + data.split.id);
+        });
     };
 
     const [response, setResponse] = useState<{ splits: Split[] }>({ splits: [] });
