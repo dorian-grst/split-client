@@ -2,7 +2,7 @@ import { ArrowRightOnRectangleIcon, PlusIcon } from '@heroicons/react/20/solid';
 import { FingerPrintIcon, Cog6ToothIcon, GlobeAsiaAustraliaIcon } from '@heroicons/react/24/outline';
 import ButtonDropdown from '@/components/dropdown/ButtonDropdown';
 import { Menu, Transition } from '@headlessui/react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext, defaultUser } from '@/context/AuthProvider';
 import { useContext } from 'react';
 import axios from 'axios';
@@ -48,7 +48,7 @@ export default function ProfileDropdown({ onJoinSplitClick, onCreateSplitClick }
 
     const menuButtons = [
         { text: 'Account', icon: <Cog6ToothIcon />, onClick: handleAccountClick, additionalClasses: 'text-gray-950' },
-        { text: 'Dropdown', icon: <GlobeAsiaAustraliaIcon />, onClick: handleDashboardClick, additionalClasses: 'text-gray-950' },
+        { text: 'Dashboard', icon: <GlobeAsiaAustraliaIcon />, onClick: handleDashboardClick, additionalClasses: 'text-gray-950' },
         { text: 'Create Split', icon: <PlusIcon />, onClick: onCreateSplitClick, additionalClasses: 'text-gray-950' },
         { text: 'Join Split', icon: <FingerPrintIcon />, onClick: onJoinSplitClick, additionalClasses: 'text-gray-950' },
         { text: 'Log out', icon: <ArrowRightOnRectangleIcon />, onClick: handleLogOut, additionalClasses: 'text-red-500' },
