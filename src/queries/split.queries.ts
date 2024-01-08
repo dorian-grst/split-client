@@ -90,6 +90,19 @@ export const getInvitationsBySplitId = async (splitId: string) => {
     }
 };
 
+export const deleteTransactionById = async (transactionId: string) => {
+    try {
+        const response = await axios.delete(VITE_API_ENDPOINT + '/v1/transaction/' + transactionId + '/delete', {
+            withCredentials: true,
+        });
+        toast.success('Transaction deleted successfully');
+        return response.data;
+    } catch (error) {
+        toast.error('Error deleting transaction');
+        console.error(error);
+    }
+};
+
 export const deleteInvitationByToken = async (splitId: string, token: string) => {
     try {
         const response = await axios.delete(VITE_API_ENDPOINT + '/v1/split/' + splitId + '/invitation/' + token, {
