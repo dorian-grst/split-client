@@ -35,7 +35,6 @@ interface AppNavbarProps {
 export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
     const [openJoinSplitModal, setJoinSplitModal] = useState(false);
     const [openCreateSplitModal, setCreateSplitModal] = useState(false);
-    const [openAddModal, setAddModal] = useState(false);
     const [groupName, setGroupName] = useState('');
     const [refreshSplitDropdown, setRefreshSplitDropdown] = useState(false);
     const { id } = useParams();
@@ -52,13 +51,7 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
         setGroupName(value);
     };
 
-    const handleRightButtonClick = () => {
-        setCreateSplitModal(false);
-        setAddModal(true);
-    };
-
     const handleCreateSplitClick = () => {
-        setAddModal(false);
         axios
             .post(
                 VITE_API_ENDPOINT + '/v1/split',
@@ -70,6 +63,7 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
             .then((response) => {
                 console.log(response);
                 setGroupName('');
+                setCreateSplitModal(false);
                 setRefreshSplitDropdown((prevState) => !prevState);
                 toast.success('Split created successfully');
             })
@@ -135,22 +129,8 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
                     textLeftButton="Cancel"
                     textRightButton="Continue"
                     onClickLeftButton={() => setCreateSplitModal(false)}
-                    onClickRightButton={handleRightButtonClick}
-                    onInputChange={handleInputChange}
-                />
-            )}
-            {openAddModal && (
-                <AddModal
-                    isOpen={openAddModal}
-                    setIsOpen={setAddModal}
-                    title="Create a Split"
-                    titleClass="text-purple-linear"
-                    label="Add members to your split"
-                    placeholder="dorian.grasset.contact@gmail.com"
-                    textLeftButton="Cancel"
-                    textRightButton="Create the Split"
-                    onClickLeftButton={() => setAddModal(false)}
                     onClickRightButton={handleCreateSplitClick}
+                    onInputChange={handleInputChange}
                 />
             )}
         </>
