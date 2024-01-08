@@ -2,10 +2,10 @@ import TransactionLayout from '@/components/layout/TransactionLayout';
 import { useEffect, useState } from 'react';
 import TransactionModal from '../modal/TransactionModal';
 import { useParams } from 'react-router-dom';
-import { findAllTransactions } from '@/queries/split.queries';
+import { deleteTransactionById, findAllTransactions } from '@/queries/split.queries';
 
 interface Transaction {
-    id: number;
+    id: string;
     title: string;
     amount: number;
     created_at: string;
@@ -27,8 +27,10 @@ interface HistoryLayoutProps {
 export default function HistoryLayout({ historyRefresh }: HistoryLayoutProps) {
     const [openTransactionModal, setTransactionModal] = useState(false);
     const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
-    const [transactions, setTransactions] = useState<Transaction[]>([]); // state to store transactions
+    const [transactions, setTransactions] = useState<Transaction[]>([]);
+    const [refreshAtDelete, setRefreshAtDelete] = useState(false);
     const { id } = useParams();
+
     const openModal = (transaction: Transaction) => {
         setSelectedTransaction(transaction);
         setTransactionModal(true);
@@ -39,20 +41,19 @@ export default function HistoryLayout({ historyRefresh }: HistoryLayoutProps) {
         setTransactionModal(false);
     };
 
+    const handleDeleteTransaction = async (transactionId: string) => {
+        deleteTransactionById(transactionId).then(() => {
+            closeModal();
+            setRefreshAtDelete((prevState) => !prevState);
+        });
+    };
+
     useEffect(() => {
-        const fetchTransactions = async () => {
-            try {
-                if (id) {
-                    await findAllTransactions(id).then((result) => {
-                        setTransactions(result);
-                    });
-                }
-            } catch (error) {
-                console.error('Error fetching transactions:', error);
-            }
-        };
-        fetchTransactions();
-    }, [id, historyRefresh]);
+        if (id)
+            findAllTransactions(id).then((result) => {
+                setTransactions(result);
+            });
+    }, [id, historyRefresh, refreshAtDelete]);
 
     const formatDate = (rawDate: string | number | Date) => {
         const formattedDate = new Date(rawDate);
@@ -92,9 +93,9 @@ export default function HistoryLayout({ historyRefresh }: HistoryLayoutProps) {
                     date={formatDate(selectedTransaction.created_at)}
                     author={selectedTransaction.payedBy?.display_name ? selectedTransaction.payedBy?.display_name : selectedTransaction.payedBy?.email || ''}
                     textLeftButton="Close"
-                    textRightButton="Modify"
+                    textRightButton="Delete"
                     onClickLeftButton={closeModal}
-                    onClickRightButton={closeModal}
+                    onClickRightButton={() => handleDeleteTransaction(selectedTransaction.id)}
                 />
             )}
         </div>
