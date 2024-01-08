@@ -90,14 +90,14 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
                 {!dashboard && (
                     <nav className="flex w-min flex-row gap-[20px]">
                         {links.map((link, index) => (
-                            <Link key={index} to={link.path} className="text-gray font-medium transition duration-300 hover:text-gray-950">
+                            <Link key={index} to={link.path} className="text-gray font-medium transition duration-300 text-gray-950 hover:text-gray-900">
                                 <h3>{link.text}</h3>
                             </Link>
                         ))}
                     </nav>
                 )}
             </Container>
-            <div className="text-abstract border-b border-light-gray px-10 py-7">
+            <div className="text-gray-950 border-b border-light-gray px-10 py-7">
                 <h1>{section}</h1>
             </div>
             {openJoinSplitModal && (

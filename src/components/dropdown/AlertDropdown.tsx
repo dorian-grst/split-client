@@ -14,7 +14,7 @@ const AlertDropdown = React.forwardRef<HTMLButtonElement, ButtonMenuProps>(({ te
     return (
         <div className={buttonClasses} onClick={onClick}>
             <div className="flex flex-row items-center justify-center gap-5">
-                <h3 className={`text-left ${textClasses}`}>{text}</h3>
+                <h3 className={`text-left text-gray-950 ${textClasses}`}>{text}</h3>
                 <div className="flex flex-row items-center justify-center gap-2">
                     <button className="cancel border-green-primary px-2 py-1 text-green-primary">
                         <CheckIcon className="h-4 w-4" />

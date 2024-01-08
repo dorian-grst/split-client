@@ -14,7 +14,7 @@ export default function NotificationDropdown({}) {
 
     return (
         <Menu as="div" className="relative flex items-center justify-center">
-            <Menu.Button>{hasNotifications ? <BellAlertIcon className="h-[28px] w-[28px]" /> : <BellIcon className="h-[28px] w-[28px]" />}</Menu.Button>
+            <Menu.Button>{hasNotifications ? <BellAlertIcon className="h-[28px] w-[28px] text-gray-950" /> : <BellIcon className="h-[28px] w-[28px] text-gray-950" />}</Menu.Button>
             <Transition
                 enter="transition duration-100 ease-out"
                 enterFrom="transform scale-95 opacity-0"
