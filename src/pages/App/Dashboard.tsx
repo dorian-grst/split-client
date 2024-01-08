@@ -99,6 +99,7 @@ export default function Dashboard() {
                                 setSplit({
                                     id: splitInfo[0].id,
                                     display_name: splitInfo[0].display_name,
+                                    description: splitInfo[0].description,
                                     owner: splitInfo[0].owner_id,
                                     members: splitInfo[0].users,
                                     transactions: splitInfo[0].transactions,

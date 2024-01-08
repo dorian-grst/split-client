@@ -44,7 +44,6 @@ export default function AddModal({ isOpen, setIsOpen, title, titleClass, label, 
     const handleGenerateCodeClick = () => {
         if (id) {
             generateInvitation(id).then((data) => {
-                toast.success('Invitation code generated successfully');
                 setIsGenerateCodeClicked(true);
                 setInvitationToken(data.invitation.token);
             });
@@ -55,11 +54,9 @@ export default function AddModal({ isOpen, setIsOpen, title, titleClass, label, 
         if (id) {
             try {
                 await deleteInvitationByToken(id, token);
-                toast.success('Invitation deleted successfully');
-                setRefreshEffect((prev) => !prev); // Modification de l'état pour forcer le rafraîchissement du useEffect
+                setRefreshEffect((prev) => !prev);
             } catch (error) {
                 console.error('Error deleting invitation:', error);
-                toast.error('Error deleting invitation');
             }
         }
     };

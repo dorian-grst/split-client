@@ -4,22 +4,31 @@ import BasicSetting from '@/components/layout/BasicSetting';
 import InputGroupModal from '@/components/modal/InputGroupModal';
 import { useContext, useEffect, useState } from 'react';
 import { SplitContext } from '@/context/SplitProvider';
-import { updateSplitDisplayName } from '@/queries/split.queries';
+import { updateSplitDescription, updateSplitDisplayName } from '@/queries/split.queries';
 
 export default function Settings() {
-    const { split } = useContext(SplitContext);
+    const { split, setSplit } = useContext(SplitContext);
     const [newDisplayName, setNewDisplayName] = useState('');
+    const [newDescription, setNewDescription] = useState('');
 
     useEffect(() => {
-        setNewDisplayName(split.display_name || '');
-    }, [split.display_name]);
+        setNewDisplayName(split.display_name ? split.display_name : '');
+        setNewDescription(split.description ? split.description : '');
+    }, [split.display_name, split.description]);
 
-    const handleDisplayNameChange = (value: string) => {
-        setNewDisplayName(value);
-    };
-
-    const handleSaveButtonClick = () => {
+    const handleSaveDisplayNameButtonClick = () => {
         updateSplitDisplayName(newDisplayName, split.id);
+        setSplit({ ...split, display_name: newDisplayName });
+      };
+    
+      const handleSaveDescriptionButtonClick = () => {
+        updateSplitDescription(newDescription, split.id);
+        setSplit({ ...split, description: newDescription });
+      };
+    
+
+    const handleInputChange = (value: string, setterFunction: React.Dispatch<React.SetStateAction<string>>) => {
+        setterFunction(value);
     };
 
     return (
@@ -28,12 +37,20 @@ export default function Settings() {
             <div className="flex flex-row gap-10 p-10">
                 <LeftMenuLayout />
                 <div className="flex w-full flex-col gap-10">
-                    <BasicSetting title={'Split name'} rule="Please use 32 characters at maximum." textButton="Save" onClick={handleSaveButtonClick}>
+                    <BasicSetting title={'Split name'} textButton="Save" onClick={handleSaveDisplayNameButtonClick}>
                         <InputGroupModal
                             value={newDisplayName}
                             label="This is your split’s visible name. For example, the name of your company or department."
                             placeholder="Voyage"
-                            onChange={handleDisplayNameChange}
+                            onChange={(value) => handleInputChange(value, setNewDisplayName)}
+                        />
+                    </BasicSetting>
+                    <BasicSetting title={'Split description'} textButton="Save" onClick={handleSaveDescriptionButtonClick}>
+                        <InputGroupModal
+                            value={newDescription}
+                            label="This is your split’s visible description."
+                            placeholder="This split is for our trip to the moon."
+                            onChange={(value) => handleInputChange(value, setNewDescription)}
                         />
                     </BasicSetting>
                     <BasicSetting title={'Delete split'} textButton="Delete Split" borderColor="border-red-500" buttonColor="bg-red-600" backgroundColor="bg-red-100">
