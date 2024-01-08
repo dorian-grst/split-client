@@ -1,5 +1,5 @@
-import axios from "axios";
-import toast from "react-hot-toast";
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 
@@ -38,6 +38,7 @@ export const getAllSplitUsers = async (userId: string) => {
         });
         return response.data;
     } catch (error) {
+        toast.error('An error occured while fetching your splits.');
         console.error(error);
     }
 };

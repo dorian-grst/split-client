@@ -10,6 +10,7 @@ export const findSplitById = async (splitId: string) => {
         });
         return response.data;
     } catch (error) {
+        toast.error('An error occured while fetching your split.');
         console.error(error);
     }
 };
@@ -21,6 +22,7 @@ export const findAllTransactions = async (splitId: string) => {
         });
         return response.data;
     } catch (error) {
+        toast.error('An error occured while fetching your transactions.');
         console.error(error);
     }
 };
@@ -28,7 +30,7 @@ export const findAllTransactions = async (splitId: string) => {
 export const updateSplitDisplayName = async (newDisplayName: string, splitId: string) => {
     try {
         const response = await axios.patch(
-            VITE_API_ENDPOINT + '/v1/split/' + splitId,
+            VITE_API_ENDPOINT + '/v1/split/' + splitId + '/displayname',
             {
                 displayName: newDisplayName,
             },
@@ -42,6 +44,23 @@ export const updateSplitDisplayName = async (newDisplayName: string, splitId: st
     }
 };
 
+export const updateSplitDescription = async (newDescription: string, splitId: string) => {
+    try {
+        const response = await axios.patch(
+            VITE_API_ENDPOINT + '/v1/split/' + splitId + '/description',
+            {
+                description: newDescription,
+            },
+            { withCredentials: true }
+        );
+        toast.success('Description updated!');
+        console.log(response.data);
+    } catch (error) {
+        toast.error('An error occured while updating your description.');
+        console.error(error);
+    }
+};
+
 export const generateInvitation = async (splitId: string) => {
     try {
         const response = await axios.post(
@@ -51,8 +70,10 @@ export const generateInvitation = async (splitId: string) => {
                 withCredentials: true,
             }
         );
+        toast.success('Invitation code generated successfully');
         return response.data;
     } catch (error) {
+        toast.error('Error generating invitation code');
         console.error(error);
     }
 };
@@ -64,6 +85,7 @@ export const getInvitationsBySplitId = async (splitId: string) => {
         });
         return response.data;
     } catch (error) {
+        toast.error('Error fetching invitations');
         console.error(error);
     }
 };
@@ -73,8 +95,10 @@ export const deleteInvitationByToken = async (splitId: string, token: string) =>
         const response = await axios.delete(VITE_API_ENDPOINT + '/v1/split/' + splitId + '/invitation/' + token, {
             withCredentials: true,
         });
+        toast.success('Invitation deleted successfully');
         return response.data;
     } catch (error) {
+        toast.error('Error deleting invitation');
         console.error(error);
     }
 };
