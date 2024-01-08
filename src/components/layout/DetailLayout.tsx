@@ -7,12 +7,12 @@ export default function DetailLayout() {
             <h3 className="font-semibold text-gray-950">Details</h3>
             <div className="flex flex-col gap-[10px]">
                 <div>
-                    <h1 className="text-abstract font-bold">{totalCost} €</h1>
-                    <p className="font-medium">My total cost</p>
+                    <h1 className="text-gray-950 font-bold">{totalCost} €</h1>
+                    <p className="text-gray-950 font-medium">My total cost</p>
                 </div>
                 <div>
-                    <h1 className="text-abstract font-bold">{totalExpense} €</h1>
-                    <p className="font-medium">Total of expense</p>
+                    <h1 className="text-gray-950 font-bold">{totalExpense} €</h1>
+                    <p className="text-gray-950 font-medium">Total of expense</p>
                 </div>
             </div>
         </div>

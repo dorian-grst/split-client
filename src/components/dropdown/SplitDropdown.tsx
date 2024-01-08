@@ -35,8 +35,8 @@ export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick, re
     return (
         <Menu as="div" className="relative">
             <Menu.Button className="flex flex-row gap-[10px] rounded-lg px-3 py-2 font-medium transition duration-300 hover:bg-light-gray">
-                <p>{split.display_name}</p>
-                <ChevronUpDownIcon className="h-[20px] w-[20px]" />
+                <p className='text-gray-950'>{split.display_name}</p>
+                <ChevronUpDownIcon className="h-[20px] w-[20px] text-gray-950" />
             </Menu.Button>
             <Transition
                 enter="transition duration-100 ease-out"

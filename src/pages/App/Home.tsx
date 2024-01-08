@@ -98,7 +98,7 @@ export default function Home() {
         <div className="relative z-10 flex h-full w-full items-center justify-center scroll-smooth bg-gray-900">
             <div className="absolute left-0 top-0 -z-10 h-screen w-full bg-abstract bg-cover bg-no-repeat"></div>
             <ScrollLink activeClass="active" smooth spy to="main" className="fixed bottom-8 right-8 cursor-pointer rounded-full bg-white p-2 mix-blend-difference">
-                <ChevronDoubleUpIcon className="h-8 w-8 text-black" />
+                <ChevronDoubleUpIcon className="h-8 w-8 text-gray-950" />
             </ScrollLink>
             <div className="flex w-[80%] flex-col items-center justify-center">
                 <section id="main" className="pb-32 pt-20">
@@ -115,7 +115,7 @@ export default function Home() {
                                     ))}
                                 </ul>
                             </nav>
-                            <RouterLink to="/login" className=" rounded-full border border-white bg-white px-6 py-3 text-black mix-blend-screen">
+                            <RouterLink to="/login" className=" rounded-full border border-white bg-white px-6 py-3 text-gray-950 mix-blend-screen">
                                 Login
                             </RouterLink>
                         </div>
