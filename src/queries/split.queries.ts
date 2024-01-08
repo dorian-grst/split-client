@@ -3,6 +3,23 @@ import toast from 'react-hot-toast';
 
 const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 
+export const createSplit = async (displayName: string) => {
+    try {
+        const response = await axios.post(
+            VITE_API_ENDPOINT + '/v1/split',
+            { displayName: displayName },
+            {
+                withCredentials: true,
+            }
+        );
+        toast.success('Split created successfully');
+        return response.data;
+    } catch (error) {
+        toast.error('Error creating split');
+        console.error(error);
+    }
+}
+
 export const findSplitById = async (splitId: string) => {
     try {
         const response = await axios.get(VITE_API_ENDPOINT + '/v1/split/' + splitId, {

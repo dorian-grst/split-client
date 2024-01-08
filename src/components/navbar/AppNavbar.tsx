@@ -1,14 +1,16 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 import ProfileDropdown from '@/components/dropdown/ProfileDropdown';
 import SplitDropdown from '@/components/dropdown/SplitDropdown';
-import { SetStateAction, useState } from 'react';
+import { SetStateAction, useContext, useState } from 'react';
 import BasicModal from '@/components/modal/BasicModal';
 import AddModal from '@/components/modal/AddModal';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import NotificationDropdown from '../dropdown/NotificationDropdown';
 import logo from '@/assets/black_logo.svg';
+import { createSplit, findSplitById } from '@/queries/split.queries';
+import { SplitContext } from '@/context/SplitProvider';
 
 const Container = tw.div`
 flex
@@ -38,6 +40,8 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
     const [groupName, setGroupName] = useState('');
     const [refreshSplitDropdown, setRefreshSplitDropdown] = useState(false);
     const { id } = useParams();
+    const { setSplit } = useContext(SplitContext);
+    const navigate = useNavigate();
 
     const links = [
         { path: '/splits/' + id, text: 'Overview' },
@@ -45,32 +49,26 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
         { path: '/splits/' + id + '/settings', text: 'Settings' },
     ];
 
-    const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
-
     const handleInputChange = (value: SetStateAction<string>) => {
         setGroupName(value);
     };
 
     const handleCreateSplitClick = () => {
-        axios
-            .post(
-                VITE_API_ENDPOINT + '/v1/split',
-                { displayName: groupName },
-                {
-                    withCredentials: true,
-                }
-            )
-            .then((response) => {
-                console.log(response);
-                setGroupName('');
-                setCreateSplitModal(false);
-                setRefreshSplitDropdown((prevState) => !prevState);
-                toast.success('Split created successfully');
-            })
-            .catch((error) => {
-                console.log(error);
-                toast.error('Error during split creation');
+        createSplit(groupName).then(async (data) => {
+            setRefreshSplitDropdown((prevState) => !prevState);
+            setCreateSplitModal(false);
+            setGroupName('');
+            const splitInfo = await findSplitById(data.split.id);
+            setSplit({
+                id: splitInfo[0].id,
+                display_name: splitInfo[0].display_name,
+                description: splitInfo[0].description,
+                owner: splitInfo[0].owner_id,
+                members: splitInfo[0].users,
+                transactions: splitInfo[0].transactions,
             });
+            navigate('/splits/' + data.split.id);
+        });
     };
 
     return (
