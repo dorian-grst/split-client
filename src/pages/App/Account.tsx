@@ -1,7 +1,8 @@
 import BasicSetting from '@/components/layout/BasicSetting';
 import InputGroupModal from '@/components/modal/InputGroupModal';
 import AppNavbar from '@/components/navbar/AppNavbar';
-import { AuthContext, updateUserDisplayName } from '@/context/AuthProvider';
+import { AuthContext } from '@/context/AuthProvider';
+import { updateUserDisplayName } from '@/queries/user.queries';
 import { useContext, useEffect, useState } from 'react';
 
 export default function Account() {

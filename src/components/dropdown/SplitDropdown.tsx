@@ -3,9 +3,11 @@ import { FingerPrintIcon } from '@heroicons/react/24/outline';
 import ButtonDropdown from '@/components/dropdown/ButtonDropdown';
 import { Menu, Transition } from '@headlessui/react';
 import { useContext, useEffect, useState } from 'react';
-import { SplitContext, findSplitById } from '@/context/SplitProvider';
+import { SplitContext } from '@/context/SplitProvider';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext, getAllUserSplits } from '@/context/AuthProvider';
+import { AuthContext } from '@/context/AuthProvider';
+import { findSplitById } from '@/queries/split.queries';
+import { getAllSplitUsers } from '@/queries/user.queries';
 
 interface Split {
     id: string;
@@ -25,7 +27,7 @@ export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick, re
     const navigate = useNavigate();
 
     useEffect(() => {
-        getAllUserSplits(user.id).then((response) => {
+        getAllSplitUsers(user.id).then((response) => {
             setResponse(response);
         });
     }, [refresh]);

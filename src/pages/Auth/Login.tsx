@@ -3,13 +3,14 @@ import '@/styles/input.css';
 import { ArrowLeftIcon } from '@heroicons/react/20/solid';
 import AuthNavbar from '@/components/navbar/AuthNavbar';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext, getUserInfos } from '@/context/AuthProvider';
+import { AuthContext } from '@/context/AuthProvider';
 import axios from 'axios';
 import { useContext } from 'react';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { getUserInfos } from '@/queries/user.queries';
 
 type UserSubmitForm = {
     email: string;
