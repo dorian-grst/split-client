@@ -23,7 +23,7 @@ export default function NotificationDropdown({}) {
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
             >
-                <Menu.Items className="p2 absolute right-0 top-4 flex min-w-[300px] flex-col rounded-lg border border-light-gray bg-white p-2">
+                <Menu.Items className="p2 absolute right-0 top-4 flex min-w-[300px] flex-col rounded-lg border border-light-gray bg-slate-50 p-2">
                     {notifications.map((notification, index) => (
                         <Menu.Item key={index}>
                             <AlertDropdown text={notification.text} onClick={() => {}} />

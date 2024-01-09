@@ -54,8 +54,8 @@ export default function Login() {
         <>
             <AuthNavbar to="/signup" buttonText="Sign Up" />
             <div className="flex h-screen w-full flex-col items-center justify-center gap-9 bg-abstract bg-cover bg-no-repeat">
-                <div className="flex flex-col items-center justify-center gap-9 rounded-xl bg-white bg-opacity-40 p-8 backdrop-blur-sm">
-                    <h1 className="text-white">Log in to SPL!T</h1>
+                <div className="flex flex-col items-center justify-center gap-9 rounded-xl bg-slate-50 bg-opacity-40 p-8 backdrop-blur-sm">
+                    <h1 className="text-slate-50">Log in to SPL!T</h1>
                     <form name="form-connexion" className="flex flex-col gap-4" method="POST" onSubmit={handleSubmit(onSubmit)}>
                         <div className="text-bold flex flex-col gap-2">
                             <input {...register('email')} placeholder="Email address" type="text" className="auth-input" />
@@ -72,7 +72,7 @@ export default function Login() {
                 </div>
                 <Link to="/error" className="flex items-center justify-center gap-[10px]">
                     <ArrowLeftIcon className="h-[20px] w-[20px] fill-white" />
-                    <h3 className="text-white">Other log in options</h3>
+                    <h3 className="text-slate-50">Other log in options</h3>
                 </Link>
             </div>
         </>

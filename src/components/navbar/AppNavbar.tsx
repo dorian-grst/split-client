@@ -1,33 +1,12 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import tw from 'tailwind-styled-components';
 import ProfileDropdown from '@/components/dropdown/ProfileDropdown';
 import SplitDropdown from '@/components/dropdown/SplitDropdown';
 import { SetStateAction, useContext, useState } from 'react';
 import BasicModal from '@/components/modal/BasicModal';
-import AddModal from '@/components/modal/AddModal';
-import axios from 'axios';
-import toast from 'react-hot-toast';
 import NotificationDropdown from '../dropdown/NotificationDropdown';
 import logo from '@/assets/black_logo.svg';
 import { createSplit, findSplitById } from '@/queries/split.queries';
 import { SplitContext } from '@/context/SplitProvider';
-
-const Container = tw.div`
-flex
-flex-col
-justify-between
-px-10
-py-7
-gap-7
-border-b
-border-light-gray
-`;
-
-const TopBar = tw.div`
-flex
-flex-row
-justify-between
-`;
 
 interface AppNavbarProps {
     section: string;
@@ -73,8 +52,8 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
 
     return (
         <>
-            <Container>
-                <TopBar>
+            <div className="flex flex-col justify-between gap-7 border-b border-light-gray bg-slate-50 px-10 py-7">
+                <div className="flex flex-row justify-between">
                     <div className="flex flex-row items-center justify-center gap-10">
                         <Link to="/" className="flex items-center justify-center gap-[10px]">
                             <img src={logo} alt="logo" />
@@ -86,18 +65,18 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
                         <NotificationDropdown />
                         <ProfileDropdown onJoinSplitClick={() => setJoinSplitModal(true)} onCreateSplitClick={() => setCreateSplitModal(true)} />
                     </div>
-                </TopBar>
+                </div>
                 {!dashboard && (
                     <nav className="flex w-min flex-row gap-[20px]">
                         {links.map((link, index) => (
-                            <Link key={index} to={link.path} className="text-gray font-medium transition duration-300 text-gray-950 hover:text-gray-900">
+                            <Link key={index} to={link.path} className="text-gray font-medium text-gray-950 transition duration-300 hover:text-gray-900">
                                 <h3>{link.text}</h3>
                             </Link>
                         ))}
                     </nav>
                 )}
-            </Container>
-            <div className="text-gray-950 border-b border-light-gray px-10 py-7">
+            </div>
+            <div className="bg-slate-50 border-b border-light-gray px-10 py-7 text-gray-950">
                 <h1>{section}</h1>
             </div>
             {openJoinSplitModal && (

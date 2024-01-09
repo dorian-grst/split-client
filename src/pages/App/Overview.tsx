@@ -13,7 +13,7 @@ export default function Overview() {
     return (
         <>
             <AppNavbar section="Overview" dashboard={false} />
-            <div className="flex flex-row gap-[40px] p-10">
+            <div className="flex flex-row gap-[40px] p-10 bg-slate-50">
                 <LeftMenuLayout refreshHistory={refreshHistory} />
                 <HistoryLayout historyRefresh={historyRefresh} />
             </div>

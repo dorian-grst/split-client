@@ -22,7 +22,7 @@ export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButt
         <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50 w-min">
             <div className="fixed inset-0 bg-gray-950/30" aria-hidden="true" />
             <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-                <Dialog.Panel className="rounded-lg border border-light-gray bg-white">
+                <Dialog.Panel className="rounded-lg border border-light-gray bg-slate-50">
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
@@ -37,7 +37,7 @@ export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButt
                                 <p className="text-gray-950">Payed by</p>
                                 <Listbox value={selected} onChange={setSelected}>
                                     <div className="relative mt-1">
-                                        <Listbox.Button className="form-input w-[400px] cursor-default rounded-lg bg-white text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-green-300 sm:text-sm">
+                                        <Listbox.Button className="form-input w-[400px] cursor-default rounded-lg bg-slate-50 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-green-300 sm:text-sm">
                                             <span className="block truncate">{selected?.display_name ? selected?.display_name : selected?.email}</span>
                                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                                 <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -45,7 +45,7 @@ export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButt
                                         </Listbox.Button>
                                         <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
                                             {split?.members && split.members.length > 0 && (
-                                                <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                                                <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-slate-50 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
                                                     {split?.members.map((member, idx) => (
                                                         <Listbox.Option
                                                             key={idx}
@@ -79,14 +79,7 @@ export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButt
                                 {split.members ? (
                                     split.members.map((member) => (
                                         <div className="flex flex-row items-center gap-2" key={member.id}>
-                                            <input
-                                                type="checkbox"
-                                                id={`payed_for_${member.id}`}
-                                                name="payed_for"
-                                                value={member.id}
-                                                data-member-id={member.id}
-                                                className="border-light-gray"
-                                            />
+                                            <input type="checkbox" id={`payed_for_${member.id}`} name="payed_for" value={member.id} data-member-id={member.id} className="border-light-gray" />
                                             <label htmlFor={`payed_for_${member.id}`}>{member.display_name ? member.display_name : member.email}</label>
                                         </div>
                                     ))

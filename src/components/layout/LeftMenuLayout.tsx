@@ -57,7 +57,7 @@ export default function LeftMenuLayout({ refreshHistory }: LeftMenuLayoutProps) 
     };
 
     return (
-        <div className="flex flex-col gap-[40px]">
+        <div className="flex flex-col gap-[40px] bg-slate-50">
             <CreateTransactionButton onClick={openCreateTransactionModalHandler} />
             <DetailLayout />
             <MemberLayout />

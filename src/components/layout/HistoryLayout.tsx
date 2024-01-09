@@ -66,7 +66,7 @@ export default function HistoryLayout({ historyRefresh }: HistoryLayoutProps) {
     const isTransactionEmpty = transactions && transactions.length === 0;
 
     return (
-        <div className={`flex w-full flex-col ${isTransactionEmpty ? 'justify-center' : ''} gap-[20px] rounded-lg border border-light-gray p-10`}>
+        <div className={`flex w-full flex-col ${isTransactionEmpty ? 'justify-center' : ''} gap-[20px] bg-slate-50 rounded-lg border border-light-gray p-10`}>
             <div className="flex flex-col">
                 {isTransactionEmpty ? (
                     <p className="text-center text-gray-400">No transactions yet!</p>

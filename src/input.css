@@ -36,6 +36,10 @@
         @apply bg-abstract bg-contain bg-clip-text text-transparent;
     }
 
+    body {
+        @apply bg-slate-50;
+    }
+
     /* STYLING SCROLLBAR */
 
     ::-webkit-scrollbar {

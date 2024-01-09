@@ -34,8 +34,8 @@ export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick, re
 
     return (
         <Menu as="div" className="relative">
-            <Menu.Button className="flex flex-row gap-[10px] rounded-lg px-3 py-2 font-medium transition duration-300 hover:bg-light-gray">
-                <p className='text-gray-950'>{split.display_name}</p>
+            <Menu.Button className="flex flex-row gap-[10px] rounded-lg px-3 py-2 font-medium transition duration-300 hover:bg-slate-100">
+                <p className="text-gray-950">{split.display_name}</p>
                 <ChevronUpDownIcon className="h-[20px] w-[20px] text-gray-950" />
             </Menu.Button>
             <Transition
@@ -46,11 +46,11 @@ export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick, re
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
             >
-                <Menu.Items className="absolute left-0 top-4 flex w-min flex-col rounded-lg border border-light-gray bg-white">
+                <Menu.Items className="absolute left-0 top-4 flex w-min flex-col rounded-lg border border-light-gray bg-slate-50">
                     <Menu.Item disabled={true}>
-                        <div className="flex flex-row items-center justify-center gap-[10px] border-b border-light-gray px-4 py-4">
+                        <div className="flex flex-row items-center justify-center gap-[10px] border-b border-light-gray px-4 py-4 ">
                             <MagnifyingGlassIcon className="h-[20px] w-[20px]" />
-                            <input placeholder="Find Split" className="leading-none focus:outline-none"></input>
+                            <input placeholder="Find Split" className="bg-slate-50 leading-none"></input>
                         </div>
                     </Menu.Item>
                     <Menu.Items className="flex flex-col px-2 pb-2 pt-4">

@@ -9,7 +9,7 @@ interface ButtonMenuProps {
 }
 
 const AlertDropdown = React.forwardRef<HTMLButtonElement, ButtonMenuProps>(({ text, onClick, additionalClasses, textClasses }, ref) => {
-    const buttonClasses = `flex w-full cursor-default flex-row items-center justify-between font-medium rounded-lg px-3 py-2 hover:bg-light-gray ${additionalClasses || ''}`;
+    const buttonClasses = `flex w-full cursor-default flex-row items-center justify-between font-medium rounded-lg px-3 py-2 hover:bg-slate-100 ${additionalClasses || ''}`;
 
     return (
         <div className={buttonClasses} onClick={onClick}>

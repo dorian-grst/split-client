@@ -97,34 +97,34 @@ export default function Home() {
     return (
         <div className="relative z-10 flex h-full w-full items-center justify-center scroll-smooth bg-gray-900">
             <div className="absolute left-0 top-0 -z-10 h-screen w-full bg-abstract bg-cover bg-no-repeat"></div>
-            <ScrollLink activeClass="active" smooth spy to="main" className="fixed bottom-8 right-8 cursor-pointer rounded-full bg-white p-2 mix-blend-difference">
+            <ScrollLink activeClass="active" smooth spy to="main" className="fixed bottom-8 right-8 cursor-pointer rounded-full bg-slate-50 p-2 mix-blend-difference">
                 <ChevronDoubleUpIcon className="h-8 w-8 text-gray-950" />
             </ScrollLink>
             <div className="flex w-[80%] flex-col items-center justify-center">
                 <section id="main" className="pb-32 pt-20">
                     <div className="flex flex-col items-center justify-center">
                         <div className="flex flex-row items-center justify-center gap-6 ">
-                            <nav className="rounded-full border border-white px-6 py-3">
+                            <nav className="rounded-full border border-slate-50 px-6 py-3">
                                 <ul className="flex flex-row gap-6">
                                     {navItems.map((item, index) => (
                                         <li key={index}>
                                             <ScrollLink activeClass="active" smooth spy to={item.link}>
-                                                <h3 className="cursor-pointer text-white">{item.text}</h3>
+                                                <h3 className="cursor-pointer text-slate-50">{item.text}</h3>
                                             </ScrollLink>
                                         </li>
                                     ))}
                                 </ul>
                             </nav>
-                            <RouterLink to="/login" className=" rounded-full border border-white bg-white px-6 py-3 text-gray-950 mix-blend-screen">
+                            <RouterLink to="/login" className=" rounded-full border border-slate-50 bg-slate-50 px-6 py-3 text-gray-950 mix-blend-screen">
                                 Login
                             </RouterLink>
                         </div>
                         <div className="flex flex-row gap-5 pb-8 pt-48">
                             <img src={logo} alt="logo" className="h-[60px] w-[60px]" />
-                            <h1 className="text-6xl text-white">SPL!T</h1>
+                            <h1 className="text-6xl text-slate-50">SPL!T</h1>
                         </div>
-                        <h3 className="pb-16 text-white">The ultimate tool for sharing your activity expenses</h3>
-                        <RouterLink className="flex flex-row items-center justify-center gap-2 rounded-lg border border-white px-6 py-4 text-white" to={'/signup'}>
+                        <h3 className="pb-16 text-slate-50">The ultimate tool for sharing your activity expenses</h3>
+                        <RouterLink className="flex flex-row items-center justify-center gap-2 rounded-lg border border-slate-50 px-6 py-4 text-slate-50" to={'/signup'}>
                             <h3>Register now</h3> <ChevronDoubleRightIcon className="h-4 w-4" />
                         </RouterLink>
                         <img src={app} alt="app" className="pt-8" />
@@ -134,7 +134,7 @@ export default function Home() {
                 <section id="features" className="py-32">
                     <div className="flex flex-col items-center justify-center gap-24 ">
                         <div className="flex flex-row gap-4">
-                            <h1 className="text-6xl text-white">SPL!T's main</h1>
+                            <h1 className="text-6xl text-slate-50">SPL!T's main</h1>
                             <h1 className="text-purple-linear text-6xl">features</h1>
                         </div>
                         <div className="flex flex-row flex-wrap justify-center gap-12">
@@ -148,7 +148,7 @@ export default function Home() {
                 <section id="details" className="py-32">
                     <div className="flex flex-row items-center justify-center gap-12 px-12">
                         <div className="flex flex-col items-center justify-center gap-12">
-                            <h2 className="text-4xl font-semibold text-white">Manage expenses with friends effortlessly using SPL!T: create, invite, and share!</h2>
+                            <h2 className="text-4xl font-semibold text-slate-50">Manage expenses with friends effortlessly using SPL!T: create, invite, and share!</h2>
                             <Details
                                 number={'2.'}
                                 title={'Cutting-edge Technologies'}
@@ -186,12 +186,12 @@ export default function Home() {
                 <section id="pricing" className="py-32">
                     <div className="flex flex-col items-center justify-center gap-24">
                         <div className="flex flex-row flex-wrap justify-center gap-4 whitespace-nowrap">
-                            <h1 className=" text-6xl text-white">One application,</h1>
+                            <h1 className=" text-6xl text-slate-50">One application,</h1>
                             <h1 className="text-purple-linear text-6xl">many</h1>
-                            <h1 className="text-6xl text-white">advantages</h1>
+                            <h1 className="text-6xl text-slate-50">advantages</h1>
                         </div>
                         <div className="flex flex-col gap-16 rounded-2xl bg-gray-800 p-8">
-                            <h2 className="font-bold text-white">SPL!T</h2>
+                            <h2 className="font-bold text-slate-50">SPL!T</h2>
                             <div className="flex flex-row gap-32">
                                 <div className="flex flex-col items-start justify-center gap-6">
                                     {advantagesLeft.map((advantage, index) => (
@@ -205,10 +205,10 @@ export default function Home() {
                                 </div>
                             </div>
                             <div className="flex flex-row items-center justify-between">
-                                <h2 className="font-semibold text-white">Free</h2>
+                                <h2 className="font-semibold text-slate-50">Free</h2>
                                 <RouterLink to="/signup" className="flex flex-row items-center justify-center gap-3 rounded-lg bg-purple-primary px-6 py-3">
-                                    <h3 className="text-white">Try it now !</h3>
-                                    <ArrowLongRightIcon className="h-4 w-4 text-white" />
+                                    <h3 className="text-slate-50">Try it now !</h3>
+                                    <ArrowLongRightIcon className="h-4 w-4 text-slate-50" />
                                 </RouterLink>
                             </div>
                         </div>
@@ -218,37 +218,37 @@ export default function Home() {
                 <section id="faq" className="pt-32">
                     <div className="flex flex-col items-center justify-center gap-24">
                         <div className="flex flex-row flex-wrap justify-center gap-4 whitespace-nowrap">
-                            <h1 className=" text-6xl text-white">We've got</h1>
+                            <h1 className=" text-6xl text-slate-50">We've got</h1>
                             <h1 className="text-purple-linear text-6xl">answers</h1>
-                            <h1 className="text-6xl text-white">to your questions</h1>
+                            <h1 className="text-6xl text-slate-50">to your questions</h1>
                         </div>
                         <Faq questionList={questionList} />
                     </div>
                 </section>
                 <footer className="flex w-full flex-row justify-between">
                     <section className="flex flex-col px-48 py-24">
-                        <p className="font-bold text-white">
+                        <p className="font-bold text-slate-50">
                             Made with ♡ by{' '}
                             <a href="https://www.instagram.com/rapidement/" className="text-warn font-bold hover:underline">
                                 @rapidement
                             </a>
                         </p>
-                        <RouterLink to="/login" className=" text-white hover:underline">
+                        <RouterLink to="/login" className=" text-slate-50 hover:underline">
                             Terms of services
                         </RouterLink>
-                        <RouterLink to="/login" className="text-white hover:underline">
+                        <RouterLink to="/login" className="text-slate-50 hover:underline">
                             Privacy policy
                         </RouterLink>
                     </section>
                     <section className="flex flex-col px-48 py-24 text-right">
-                        <p className="font-bold text-white">Alternatives</p>
-                        <a href="" className="text-white hover:underline">
+                        <p className="font-bold text-slate-50">Alternatives</p>
+                        <a href="" className="text-slate-50 hover:underline">
                             tricount.com
                         </a>
-                        <a href="" className="text-white hover:underline">
+                        <a href="" className="text-slate-50 hover:underline">
                             ratathune.fr
                         </a>
-                        <a href="" className="text-white hover:underline">
+                        <a href="" className="text-slate-50 hover:underline">
                             polybank.fr
                         </a>
                     </section>
