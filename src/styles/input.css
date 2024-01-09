@@ -4,7 +4,6 @@
     @apply w-80;
     @apply h-12;
     @apply font-semibold;
-    @apply focus:outline-none;
     @apply placeholder:text-gray-300;
     @apply text-gray-950;
     @apply border-2;
@@ -12,6 +11,7 @@
 }
 
 .form-input {
+    @apply bg-slate-50;
     @apply border ;
     @apply border-light-gray;
     @apply leading-none;

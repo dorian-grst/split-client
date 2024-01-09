@@ -9,7 +9,7 @@
     @apply transition;
     @apply duration-300;
     @apply font-bold;
-    @apply text-white;
+    @apply text-slate-50;
     @apply hover:bg-gray-950;
     @apply flex;
     @apply items-center;
@@ -18,9 +18,9 @@
 
 .auth-navbar-button {
     @apply px-4;
-    @apply border-white;
+    @apply border-slate-50;
     @apply border;
-    @apply text-white;
+    @apply text-slate-50;
     @apply rounded-md;
     @apply flex;
     @apply items-center;
@@ -75,7 +75,7 @@
 .next {
     @apply px-3;
     @apply py-2;
-    @apply text-white;
+    @apply text-slate-50;
     @apply bg-gray-900;
     @apply transition;
     @apply duration-300;
@@ -104,7 +104,7 @@
     @apply p-3;
     @apply rounded-lg;
     @apply h-12;
-    @apply text-white;
+    @apply text-slate-50;
     @apply bg-gray-900;
     @apply hover:bg-gray-950;
     @apply rounded-md;
@@ -113,5 +113,5 @@
     @apply duration-300;
     @apply border-2;
     @apply font-bold;
-    @apply text-white;
+    @apply text-slate-50;
 }

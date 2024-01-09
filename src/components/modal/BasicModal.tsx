@@ -38,7 +38,7 @@ export default function BasicModal({
         <Dialog initialFocus={completeButtonRef} open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50 w-min">
             <div className="fixed inset-0 bg-gray-950/30" aria-hidden="true" />
             <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-                <Dialog.Panel className="rounded-lg border border-light-gray bg-white">
+                <Dialog.Panel className="rounded-lg border border-light-gray bg-slate-50">
                     <div className="flex flex-col gap-[10px] border-b border-light-gray p-8">
                         <h1 className={titleClass}>{title}</h1>
                         <InputGroupModal label={label} placeholder={placeholder} value={value} onChange={(value) => (onInputChange ? onInputChange(value) : undefined)} />

@@ -68,7 +68,7 @@ export default function Dashboard() {
         <>
             <AppNavbar section="Dashboard" dashboard={true} />
 
-            <div className="px-[20%] py-10">
+            <div className="bg-slate-50 px-[20%] py-10">
                 <div className="flex w-full flex-col gap-10 rounded-lg border border-light-gray p-10">
                     <div className="flex flex-row items-center justify-between">
                         <h3 className="text-center text-gray-950">{response.splits.length === 0 ? 'No Split yet !' : 'Choose a split !'}</h3>
@@ -85,7 +85,7 @@ export default function Dashboard() {
                     {response.splits.map((splitItem) => (
                         <button
                             key={splitItem.id}
-                            className="rounded-lg border border-light-gray p-10 hover:bg-light-gray"
+                            className="rounded-lg border border-light-gray p-10 hover:bg-slate-100"
                             onClick={async () => {
                                 const splitInfo = await findSplitById(splitItem.id);
                                 setSplit({
@@ -101,7 +101,7 @@ export default function Dashboard() {
                         >
                             <div className="flex flex-row items-center justify-start gap-10" key={splitItem.id}>
                                 <div className="h-[64px] w-[64px] rounded-full bg-abstract bg-cover bg-no-repeat focus:outline-none"></div>
-                                <h3 className='text-gray-950'>{splitItem.display_name}</h3>
+                                <h3 className="text-gray-950">{splitItem.display_name}</h3>
                                 <h4>{/* Ajoutez ici le contenu que vous souhaitez afficher pour chaque splitItem */}</h4>
                             </div>
                         </button>

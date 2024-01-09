@@ -34,7 +34,7 @@ export default function Settings() {
     return (
         <>
             <AppNavbar section="Settings" dashboard={false} />
-            <div className="flex flex-row gap-10 p-10">
+            <div className="flex flex-row gap-10 p-10 bg-slate-50">
                 <LeftMenuLayout />
                 <div className="flex w-full flex-col gap-10">
                     <BasicSetting title={'Split name'} textButton="Save" onClick={handleSaveDisplayNameButtonClick}>
