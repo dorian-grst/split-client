@@ -66,7 +66,7 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
     };
 
     return (
-        <div className='md:px-[20%] xl:px-[30%] px-[5%]'>
+        <div className="px-[5%] md:px-[20%] xl:px-[30%]">
             <div className="flex flex-col justify-between gap-7 border-b border-light-gray bg-slate-50 py-7">
                 <div className="flex flex-row justify-between">
                     <div className="flex flex-row items-center justify-center gap-10">
@@ -77,7 +77,7 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
                         {!dashboard && <SplitDropdown onJoinSplitClick={() => setJoinSplitModal(true)} onCreateSplitClick={() => setCreateSplitModal(true)} refresh={refreshSplitDropdown} />}
                     </div>
                     <div className="flex flex-row items-center justify-center gap-10">
-                        <NotificationDropdown />
+                        {!dashboard && <NotificationDropdown />}
                         <ProfileDropdown onJoinSplitClick={() => setJoinSplitModal(true)} onCreateSplitClick={() => setCreateSplitModal(true)} />
                     </div>
                 </div>
@@ -91,7 +91,7 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
                     </nav>
                 )}
             </div>
-            <div className="bg-slate-50 border-b border-light-gray py-7 text-gray-950">
+            <div className="border-b border-light-gray bg-slate-50 py-7 text-gray-950">
                 <h1>{section}</h1>
             </div>
             {openJoinSplitModal && (
