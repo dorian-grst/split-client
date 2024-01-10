@@ -37,7 +37,7 @@ export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButt
                                 <p className="text-gray-950">Payed by</p>
                                 <Listbox value={selected} onChange={setSelected}>
                                     <div className="relative mt-1">
-                                        <Listbox.Button className="form-input w-[400px] cursor-default rounded-lg bg-slate-50 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-green-300 sm:text-sm">
+                                        <Listbox.Button className="form-input w-full cursor-default rounded-lg bg-slate-50 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-green-300 sm:text-sm">
                                             <span className="block truncate">{selected?.display_name ? selected?.display_name : selected?.email}</span>
                                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                                 <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />

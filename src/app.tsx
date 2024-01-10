@@ -3,13 +3,14 @@ import Overview from '@/pages/App/Overview';
 import Login from '@/pages/Auth/Login';
 import SignUp from '@/pages/Auth/SignUp';
 import Error from '@/pages/Auth/Error';
-import Equality from '@/pages/App/Equality';
+import Balance from '@/pages/App/Balance';
 import Settings from '@/pages/App/Settings';
 import Account from '@/pages/App/Account';
 import { Toaster } from 'react-hot-toast';
-import Dashboard from './pages/App/Dashboard';
-import Home from './pages/App/Home';
-import SplitProvider from './context/SplitProvider';
+import Dashboard from '@/pages/App/Dashboard';
+import Home from '@/pages/App/Home';
+import SplitProvider from '@/context/SplitProvider';
+import Expenses from '@/pages/App/Expenses';
 
 export default function App() {
     return (
@@ -37,10 +38,10 @@ export default function App() {
                     }
                 />
                 <Route
-                    path="/splits/:id/equality"
+                    path="/splits/:id/balance"
                     element={
                         <SplitProvider>
-                            <Equality />
+                            <Balance />
                         </SplitProvider>
                     }
                 />
@@ -49,6 +50,12 @@ export default function App() {
                     element={
                         <SplitProvider>
                             <Settings />
+                        </SplitProvider>
+                    }
+                />
+                <Route path="/splits/:id/expenses" element={
+                        <SplitProvider>
+                            <Expenses />
                         </SplitProvider>
                     }
                 />

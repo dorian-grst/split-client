@@ -3,7 +3,11 @@ import AddModal from '../modal/AddModal';
 import { SplitContext } from '@/context/SplitProvider';
 import { AuthContext } from '@/context/AuthProvider';
 
-export default function MemberLayout() {
+interface MemberLayoutProps {
+    additionalClass: string;
+}
+
+export default function MemberLayout({ additionalClass }: MemberLayoutProps) {
     const [openAddModal, setOpenAddModal] = useState(false);
     const { split } = useContext(SplitContext);
     const { user } = useContext(AuthContext);
@@ -17,7 +21,7 @@ export default function MemberLayout() {
     };
 
     return (
-        <div className="flex w-min min-w-[300px] flex-col gap-[20px] rounded-lg border border-light-gray p-10">
+        <div className={`flex flex-col gap-[20px] rounded-lg border border-light-gray p-10 ${additionalClass}`}>
             <div className="flex flex-row items-center justify-between">
                 <h3 className="font-semibold text-gray-950">Members</h3>
                 {split.members && split.members.length > 0 && (

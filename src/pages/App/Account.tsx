@@ -24,7 +24,7 @@ export default function Account() {
     return (
         <div>
             <AppNavbar section="Account" dashboard={true} />
-            <div className="flex flex-row gap-10 bg-slate-50 px-[20%] py-10">
+            <div className="flex flex-row gap-10 bg-slate-50 py-10 md:px-[20%] xl:px-[30%] px-[5%]">
                 <div className="flex w-full flex-col gap-10">
                     <BasicSetting title="Display name" textButton="Save" onClick={handleSaveButtonClick}>
                         <InputGroupModal value={newDisplayName} label="This is your visible display name." placeholder="Rapidement" onChange={handleDisplayNameChange} />
