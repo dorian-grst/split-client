@@ -1,14 +1,35 @@
 import { Menu, Transition } from '@headlessui/react';
 import { BellIcon, BellAlertIcon } from '@heroicons/react/24/outline';
 import AlertDropdown from './AlertDropdown';
+import { useEffect, useState } from 'react';
+import { deleteNotificationById, getNotificationsBySplitId } from '@/queries/split.queries';
+import { useParams } from 'react-router-dom';
 
-export default function NotificationDropdown({}) {
-    const notifications = [
-        { text: "Dorian vous invite a rejoindre 'DO3'" },
-        { text: "Dorian vous invite a rejoindre 'DO3'" },
-        { text: "Dorian vous invite a rejoindre 'DO3'" },
-        { text: "Dorian vous invite a rejoindre 'DO3'" },
-    ];
+interface User {
+    id: string;
+    email: string;
+    display_name: string | null;
+}
+
+interface Notification {
+    id: string;
+    user_id: string;
+    split: string;
+    user: User;
+}
+
+export default function NotificationDropdown() {
+    const [notifications, setNotifications] = useState<Notification[]>([]);
+    const [refresh, setRefresh] = useState(false);
+    const { id } = useParams();
+
+    useEffect(() => {
+        if (id) {
+            getNotificationsBySplitId(id).then((response) => {
+                setNotifications(response);
+            });
+        }
+    }, [id, refresh]);
 
     const hasNotifications = notifications.length > 0;
 
@@ -23,12 +44,23 @@ export default function NotificationDropdown({}) {
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
             >
-                <Menu.Items className="p2 absolute right-0 top-4 flex min-w-[300px] flex-col rounded-lg border border-light-gray bg-slate-50 p-2">
-                    {notifications.map((notification, index) => (
-                        <Menu.Item key={index}>
-                            <AlertDropdown text={notification.text} onClick={() => {}} />
-                        </Menu.Item>
-                    ))}
+                <Menu.Items className="absolute right-0 top-4 flex min-w-[300px] flex-col rounded-lg border border-light-gray bg-slate-50 p-2 p-2">
+                    {hasNotifications ? (
+                        notifications.map((notification, index) => (
+                            <Menu.Item key={index}>
+                                <AlertDropdown
+                                    text={notification.user.display_name ? notification.user.display_name : notification.user.email + ' a rejoint le split !'}
+                                    onClick={() => {
+                                        deleteNotificationById(notification.id).then(() => {
+                                            setRefresh((prev) => !prev);
+                                        });
+                                    }}
+                                />
+                            </Menu.Item>
+                        ))
+                    ) : (
+                        <p>No notifications available</p>
+                    )}
                 </Menu.Items>
             </Transition>
         </Menu>

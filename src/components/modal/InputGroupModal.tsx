@@ -19,7 +19,7 @@ export default function InputGroupModal({ label, placeholder, type, value, name,
     return (
         <div className="flex flex-col gap-2">
             <p className="text-gray-950">{label}</p>
-            <input placeholder={placeholder} name={name} value={value} type={type} onChange={handleChange} className="form-input w-[400px]" />
+            <input placeholder={placeholder} name={name} value={value} type={type} onChange={handleChange} className="form-input" />
         </div>
     );
 }

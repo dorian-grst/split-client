@@ -2,10 +2,10 @@ import BasicModal from '@/components/modal/BasicModal';
 import AppNavbar from '@/components/navbar/AppNavbar';
 import { AuthContext } from '@/context/AuthProvider';
 import { SplitContext } from '@/context/SplitProvider';
-import { createSplit, findSplitById, joinSplit } from '@/queries/split.queries';
+import { createNotification, createSplit, findAllTransactions, findSplitById, joinSplit } from '@/queries/split.queries';
 import { getAllSplitUsers } from '@/queries/user.queries';
 import { SetStateAction, useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface Split {
     id: string;
@@ -13,11 +13,21 @@ interface Split {
     members: string[];
 }
 
+interface DataValue {
+    userId: string;
+    splitId: string;
+}
+
 export default function Dashboard() {
     const [openJoinSplitModal, setJoinSplitModal] = useState(false);
     const [openCreateSplitModal, setCreateSplitModal] = useState(false);
     const [groupName, setGroupName] = useState('');
     const [refreshSplitList, setRefreshSplitList] = useState(false);
+    const [response, setResponse] = useState<{ splits: Split[] }>({ splits: [] });
+    const { user } = useContext(AuthContext);
+    const { id } = useParams();
+    const { setSplit } = useContext(SplitContext);
+    const navigate = useNavigate();
 
     const handleInputChange = (value: SetStateAction<string>) => {
         setGroupName(value);
@@ -30,9 +40,15 @@ export default function Dashboard() {
     };
 
     const handleJoinSplitClick = () => {
-        joinSplit(joinSplitToken).then(() => {
+        joinSplit(joinSplitToken).then((response) => {
             setJoinSplitModal(false);
             setRefreshSplitList((prevState) => !prevState);
+            const data: DataValue = {
+                userId: user.id,
+                splitId: response.split[0].id,
+            };
+            console.log(response);
+            createNotification(data);
         });
     };
 
@@ -54,10 +70,6 @@ export default function Dashboard() {
         });
     };
 
-    const [response, setResponse] = useState<{ splits: Split[] }>({ splits: [] });
-    const { user } = useContext(AuthContext);
-    const { setSplit } = useContext(SplitContext);
-    const navigate = useNavigate();
     useEffect(() => {
         getAllSplitUsers(user.id).then((response) => {
             setResponse(response);
@@ -68,11 +80,11 @@ export default function Dashboard() {
         <>
             <AppNavbar section="Dashboard" dashboard={true} />
 
-            <div className="bg-slate-50 px-[20%] py-10">
+            <div className="bg-slate-50 px-[5%] py-10 md:px-[20%] xl:px-[30%]">
                 <div className="flex w-full flex-col gap-10 rounded-lg border border-light-gray p-10">
                     <div className="flex flex-row items-center justify-between">
                         <h3 className="text-center text-gray-950">{response.splits.length === 0 ? 'No Split yet !' : 'Choose a split !'}</h3>
-                        <div className="flex flex-row gap-10">
+                        <div className="flex flex-row gap-5">
                             <button className="text-purple-linear rounded-md border border-purple-primary px-3 py-2" onClick={() => setCreateSplitModal(true)}>
                                 Create Split
                             </button>

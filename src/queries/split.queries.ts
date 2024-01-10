@@ -18,7 +18,7 @@ export const createSplit = async (displayName: string) => {
         toast.error('Error creating split');
         console.error(error);
     }
-}
+};
 
 export const findSplitById = async (splitId: string) => {
     try {
@@ -43,6 +43,53 @@ export const findAllTransactions = async (splitId: string) => {
         console.error(error);
     }
 };
+
+interface TransactionData {
+    title: string;
+    amount: string;
+    splitId: string; // Remplacez le type par celui approprié
+    payedById?: string; // Remplacez le type par celui approprié
+    payedForIds: string[]; // Remplacez le type par celui approprié
+}
+
+export const createTransaction = async (data: TransactionData) => {
+    try {
+        const response = await axios.post(VITE_API_ENDPOINT + '/v1/transaction', data, {
+            withCredentials: true,
+        });
+        return response.data;
+    } catch (error) {
+        toast.error('An error occured while creating your transaction.');
+        console.error(error);
+    }
+};
+
+interface NotificationData {
+    userId: string;
+    splitId: string;
+}
+
+export const createNotification = async (data: NotificationData) => {
+    try {
+        const response = await axios.post(VITE_API_ENDPOINT + '/v1/split/' + data.splitId + '/notification', data, {
+            withCredentials: true,
+        });
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const getNotificationsBySplitId = async (splitId: string) => {
+    try {
+        const response = await axios.get(VITE_API_ENDPOINT + '/v1/split/' + splitId + '/notifications', {
+            withCredentials: true,
+        });
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 export const updateSplitDisplayName = async (newDisplayName: string, splitId: string) => {
     try {
@@ -132,6 +179,19 @@ export const deleteInvitationByToken = async (splitId: string, token: string) =>
         console.error(error);
     }
 };
+
+export const deleteNotificationById = async (notificationId: string) => {
+    try {
+        const response = await axios.delete(VITE_API_ENDPOINT + '/v1/split/notification/' + notificationId + '/delete', {
+            withCredentials: true,
+        });
+        toast.success('Notification deleted successfully');
+        return response.data;
+    } catch (error) {
+        toast.error('Error deleting notification');
+        console.error(error);
+    }
+}
 
 export const joinSplit = async (token: string) => {
     try {

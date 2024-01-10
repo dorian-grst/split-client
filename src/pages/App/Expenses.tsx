@@ -1,14 +1,11 @@
 import CreateTransactionButton from '@/components/layout/CreateTransactionButton';
 import DetailLayout from '@/components/layout/DetailLayout';
-import MemberLayout from '@/components/layout/MemberLayout';
+import HistoryLayout from '@/components/layout/HistoryLayout';
 import CreateTransactionModal from '@/components/modal/CreateTransactionModal';
+import AppNavbar from '@/components/navbar/AppNavbar';
 import { Member, SplitContext } from '@/context/SplitProvider';
 import { createTransaction } from '@/queries/split.queries';
 import { useContext, useState } from 'react';
-
-interface LeftMenuLayoutProps {
-    refreshHistory?: () => void;
-}
 
 interface TransactionData {
     title: string;
@@ -18,10 +15,11 @@ interface TransactionData {
     payedForIds: string[];
 }
 
-export default function LeftMenuLayout({ refreshHistory }: LeftMenuLayoutProps) {
+export default function Expenses() {
     const [openCreateTransactionModal, setOpenCreateTransactionModal] = useState(false);
     const { split } = useContext(SplitContext);
     const [selectedMember, setSelectedMember] = useState<Member | undefined>(split?.members?.[0]);
+    const [historyRefresh, setHistoryRefresh] = useState(false); // Ajout de l'état de rafraîchissement
 
     const openCreateTransactionModalHandler = () => {
         setOpenCreateTransactionModal(true);
@@ -52,7 +50,7 @@ export default function LeftMenuLayout({ refreshHistory }: LeftMenuLayoutProps) 
             .then(() => {
                 setOpenCreateTransactionModal(false);
                 setSelectedMember(selected);
-                if (refreshHistory) refreshHistory();
+                setHistoryRefresh((prev) => !prev);
             })
             .catch((error) => {
                 console.log(error.response.data);
@@ -60,12 +58,15 @@ export default function LeftMenuLayout({ refreshHistory }: LeftMenuLayoutProps) 
     };
 
     return (
-        <div className="flex flex-col gap-[40px] bg-slate-50 sm:flex-row">
-            <div className="flex flex-col gap-[40px] sm:w-1/2">
-                <CreateTransactionButton onClick={openCreateTransactionModalHandler} />
-                <DetailLayout />
+        <>
+            <AppNavbar section="Expenses" dashboard={false} />
+            <div className="flex flex-col gap-[40px] bg-slate-50 p-10 px-[5%] md:px-[20%] xl:px-[30%]">
+                <div className="flex flex-col gap-[40px] ">
+                    <CreateTransactionButton onClick={openCreateTransactionModalHandler} />
+                    <DetailLayout row={true} />
+                </div>
+                <HistoryLayout historyRefresh={historyRefresh} />
             </div>
-            <MemberLayout additionalClass={'sm:w-1/2'} />
             {openCreateTransactionModal && (
                 <CreateTransactionModal
                     isOpen={openCreateTransactionModal}
@@ -79,6 +80,6 @@ export default function LeftMenuLayout({ refreshHistory }: LeftMenuLayoutProps) 
                     selected={selectedMember}
                 />
             )}
-        </div>
+        </>
     );
 }

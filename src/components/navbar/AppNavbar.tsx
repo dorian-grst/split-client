@@ -5,7 +5,7 @@ import { SetStateAction, useContext, useState } from 'react';
 import BasicModal from '@/components/modal/BasicModal';
 import NotificationDropdown from '../dropdown/NotificationDropdown';
 import logo from '@/assets/black_logo.svg';
-import { createSplit, findSplitById } from '@/queries/split.queries';
+import { createSplit, findSplitById, joinSplit } from '@/queries/split.queries';
 import { SplitContext } from '@/context/SplitProvider';
 
 interface AppNavbarProps {
@@ -18,15 +18,30 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
     const [openCreateSplitModal, setCreateSplitModal] = useState(false);
     const [groupName, setGroupName] = useState('');
     const [refreshSplitDropdown, setRefreshSplitDropdown] = useState(false);
+    // const [refreshSplitList, setRefreshSplitList] = useState(false);
     const { id } = useParams();
     const { setSplit } = useContext(SplitContext);
     const navigate = useNavigate();
 
     const links = [
         { path: '/splits/' + id, text: 'Overview' },
-        { path: '/splits/' + id + '/equality', text: 'Equality' },
+        { path: '/splits/' + id + '/expenses', text: 'Expenses' },
+        { path: '/splits/' + id + '/balance', text: 'Balance' },
         { path: '/splits/' + id + '/settings', text: 'Settings' },
     ];
+
+    const [joinSplitToken, setJoinSplitToken] = useState('');
+
+    const handleJoinSplitInputChange = (value: string) => {
+        setJoinSplitToken(value);
+    };
+
+    const handleJoinSplitClick = () => {
+        joinSplit(joinSplitToken).then(() => {
+            setJoinSplitModal(false);
+            // setRefreshSplitList((prevState) => !prevState);
+        });
+    };
 
     const handleInputChange = (value: SetStateAction<string>) => {
         setGroupName(value);
@@ -51,8 +66,8 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
     };
 
     return (
-        <>
-            <div className="flex flex-col justify-between gap-7 border-b border-light-gray bg-slate-50 px-10 py-7">
+        <div className='md:px-[20%] xl:px-[30%] px-[5%]'>
+            <div className="flex flex-col justify-between gap-7 border-b border-light-gray bg-slate-50 py-7">
                 <div className="flex flex-row justify-between">
                     <div className="flex flex-row items-center justify-center gap-10">
                         <Link to="/" className="flex items-center justify-center gap-[10px]">
@@ -76,7 +91,7 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
                     </nav>
                 )}
             </div>
-            <div className="bg-slate-50 border-b border-light-gray px-10 py-7 text-gray-950">
+            <div className="bg-slate-50 border-b border-light-gray py-7 text-gray-950">
                 <h1>{section}</h1>
             </div>
             {openJoinSplitModal && (
@@ -90,9 +105,8 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
                     textLeftButton="Cancel"
                     textRightButton="Join the Split"
                     onClickLeftButton={() => setJoinSplitModal(false)}
-                    onClickRightButton={() => {
-                        setJoinSplitModal(false);
-                    }}
+                    onClickRightButton={handleJoinSplitClick}
+                    onInputChange={handleJoinSplitInputChange}
                 />
             )}
             {openCreateSplitModal && (
@@ -110,6 +124,6 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
                     onInputChange={handleInputChange}
                 />
             )}
-        </>
+        </div>
     );
 }
