@@ -17,10 +17,9 @@ interface Split {
 interface SplitMenuProps {
     onJoinSplitClick: () => void;
     onCreateSplitClick: () => void;
-    refresh: boolean;
 }
 
-export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick, refresh }: SplitMenuProps) {
+export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick }: SplitMenuProps) {
     const [response, setResponse] = useState<{ splits: Split[] }>({ splits: [] });
     const { user } = useContext(AuthContext);
     const { split, setSplit } = useContext(SplitContext);
@@ -30,7 +29,7 @@ export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick, re
         getAllSplitUsers(user.id).then((response) => {
             setResponse(response);
         });
-    }, [refresh]);
+    }, [user.id, split]);
 
     return (
         <Menu as="div" className="relative">
@@ -46,7 +45,7 @@ export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick, re
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
             >
-                <Menu.Items className="absolute min-w-[300px] left-0 top-4 flex w-min flex-col rounded-lg border border-light-gray bg-slate-50">
+                <Menu.Items className="absolute min-w-[300px] left-0 flex w-min flex-col rounded-lg border border-light-gray bg-slate-50">
                 
                     <Menu.Items className="flex flex-col px-2 pb-2 pt-4">
                         <Menu.Item>

@@ -65,7 +65,7 @@ export default function ProfileDropdown({ onJoinSplitClick, onCreateSplitClick }
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
             >
-                <Menu.Items className="absolute right-0 top-4 flex w-min flex-col rounded-lg border border-light-gray bg-slate-50 px-2 pb-2 pt-4">
+                <Menu.Items className="absolute right-0 top-8 flex w-min flex-col rounded-lg border border-light-gray bg-slate-50 px-2 pb-2 pt-4">
                     <Menu.Item>
                         <h3 className="px-3 pb-2 font-medium text-gray-950">{user.email}</h3>
                     </Menu.Item>

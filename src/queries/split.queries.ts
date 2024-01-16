@@ -32,24 +32,12 @@ export const findSplitById = async (splitId: string) => {
     }
 };
 
-export const findAllTransactions = async (splitId: string) => {
-    try {
-        const response = await axios.get(VITE_API_ENDPOINT + '/v1/split/' + splitId + '/transactions', {
-            withCredentials: true,
-        });
-        return response.data;
-    } catch (error) {
-        toast.error('An error occured while fetching your transactions.');
-        console.error(error);
-    }
-};
-
 interface TransactionData {
     title: string;
     amount: string;
     splitId: string; // Remplacez le type par celui approprié
     payedById?: string; // Remplacez le type par celui approprié
-    payedForIds: string[]; // Remplacez le type par celui approprié
+    usersIds: string[]; // Remplacez le type par celui approprié
 }
 
 export const createTransaction = async (data: TransactionData) => {

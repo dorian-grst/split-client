@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { getUserInfos } from '@/queries/user.queries';
+import toast from 'react-hot-toast';
 
 const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 
@@ -41,12 +42,12 @@ export default function SignUp() {
                 withCredentials: true,
             })
             .then(async () => {
-                const userInfos = await getUserInfos();
-                setUser(userInfos);
-                navigate('/dashboard');
+                navigate('/login');
+                toast.success('Account created');
             })
             .catch((error) => {
                 console.log(error.response.data);
+                toast.error('Error during signup');
             });
     };
 

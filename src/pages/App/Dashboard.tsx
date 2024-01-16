@@ -2,7 +2,7 @@ import BasicModal from '@/components/modal/BasicModal';
 import AppNavbar from '@/components/navbar/AppNavbar';
 import { AuthContext } from '@/context/AuthProvider';
 import { SplitContext } from '@/context/SplitProvider';
-import { createNotification, createSplit, findAllTransactions, findSplitById, joinSplit } from '@/queries/split.queries';
+import { createNotification, createSplit, findSplitById, joinSplit } from '@/queries/split.queries';
 import { getAllSplitUsers } from '@/queries/user.queries';
 import { SetStateAction, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -74,7 +74,7 @@ export default function Dashboard() {
         getAllSplitUsers(user.id).then((response) => {
             setResponse(response);
         });
-    }, [refreshSplitList]);
+    }, [refreshSplitList, user.id]);
 
     return (
         <>

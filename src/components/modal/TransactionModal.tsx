@@ -9,13 +9,23 @@ interface Transaction {
     amount: number;
     date: string;
     author: string;
+    payedFor: User[];
     textLeftButton: string;
     textRightButton: string;
     onClickLeftButton?: () => void;
     onClickRightButton?: () => void;
 }
 
-export default function TransactionModal({ isOpen, setIsOpen, title, amount, date, author, textLeftButton, textRightButton, onClickLeftButton, onClickRightButton }: Transaction) {
+interface User {
+    id: string;
+    email: string;
+    display_name: string | null;
+    remember_me_token: string | null;
+    created_at: string;
+    updated_at: string;
+}
+
+export default function TransactionModal({ isOpen, setIsOpen, title, amount, date, author, payedFor, textLeftButton, textRightButton, onClickLeftButton, onClickRightButton }: Transaction) {
     const completeButtonRef = useRef(null);
 
     return (
@@ -30,6 +40,16 @@ export default function TransactionModal({ isOpen, setIsOpen, title, amount, dat
                             <h3 className="text-gray-950">Payed by {author}</h3>
                             <h3 className="text-gray-950">{date}</h3>
                         </div>
+                        {payedFor && (
+                            <div>
+                                <h3 className="text-gray-950">Payed for</h3>
+                                {payedFor.map((user: User) => (
+                                    <div key={user.id}>
+                                        <h3 className="text-gray-950">• {user.display_name ? user.display_name : user.email}</h3>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                     <div></div>
                     <div className="flex flex-row justify-between p-8">

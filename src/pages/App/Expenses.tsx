@@ -12,14 +12,13 @@ interface TransactionData {
     amount: string;
     splitId: string;
     payedById?: string;
-    payedForIds: string[];
+    usersIds: string[];
 }
 
 export default function Expenses() {
     const [openCreateTransactionModal, setOpenCreateTransactionModal] = useState(false);
-    const { split } = useContext(SplitContext);
+    const { split, updateSplit } = useContext(SplitContext);
     const [selectedMember, setSelectedMember] = useState<Member | undefined>(split?.members?.[0]);
-    const [historyRefresh, setHistoryRefresh] = useState(false); // Ajout de l'état de rafraîchissement
 
     const openCreateTransactionModalHandler = () => {
         setOpenCreateTransactionModal(true);
@@ -43,14 +42,14 @@ export default function Expenses() {
             amount: amount ?? '',
             splitId: split.id,
             payedById: selected?.id ?? '',
-            payedForIds: payedForMembers.map((member) => member?.id ?? ''),
+            usersIds: payedForMembers.map((member) => member?.id ?? ''),
         };
 
         createTransaction(data)
             .then(() => {
                 setOpenCreateTransactionModal(false);
                 setSelectedMember(selected);
-                setHistoryRefresh((prev) => !prev);
+                updateSplit(split.id);
             })
             .catch((error) => {
                 console.log(error.response.data);
@@ -65,7 +64,7 @@ export default function Expenses() {
                     <CreateTransactionButton onClick={openCreateTransactionModalHandler} />
                     <DetailLayout row={true} />
                 </div>
-                <HistoryLayout historyRefresh={historyRefresh} />
+                <HistoryLayout />
             </div>
             {openCreateTransactionModal && (
                 <CreateTransactionModal
