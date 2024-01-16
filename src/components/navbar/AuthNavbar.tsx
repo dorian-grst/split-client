@@ -8,7 +8,7 @@ interface AuthNavbarProps {
 
 export default function AuthNavbar({ to, buttonText }: AuthNavbarProps) {
     return (
-        <div className="absolute flex w-full justify-between px-48 pt-11">
+        <div className="absolute flex w-full justify-between md:px-48 px-12 sm:24 pt-11 ">
             <Link to="/" className="flex items-center justify-center gap-3">
                 <img src={logo} alt="logo" />
                 <h2 className="font-bold text-slate-50">SPL!T</h2>
