@@ -1,35 +1,32 @@
 import TransactionLayout from '@/components/layout/TransactionLayout';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import TransactionModal from '../modal/TransactionModal';
-import { useParams } from 'react-router-dom';
-import { deleteTransactionById, findAllTransactions } from '@/queries/split.queries';
+import { deleteTransactionById } from '@/queries/split.queries';
+import { SplitContext } from '@/context/SplitProvider';
 
-interface Transaction {
+interface User {
+    id: string;
+    email: string;
+    display_name: string | null;
+    remember_me_token: string | null;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Transaction {
     id: string;
     title: string;
     amount: number;
     created_at: string;
-    payed_by_id: string;
-    payedBy?: {
-        id: string;
-        email: string;
-        display_name: string | null;
-        remember_me_token: string | null;
-        created_at: string;
-        updated_at: string;
-    };
+    payedBy: User;
+    payedFor?: User[];
 }
 
-interface HistoryLayoutProps {
-    historyRefresh: boolean;
-}
-
-export default function HistoryLayout({ historyRefresh }: HistoryLayoutProps) {
+export default function HistoryLayout({}) {
     const [openTransactionModal, setTransactionModal] = useState(false);
     const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
     const [transactions, setTransactions] = useState<Transaction[]>([]);
-    const [refreshAtDelete, setRefreshAtDelete] = useState(false);
-    const { id } = useParams();
+    const { split, updateSplit } = useContext(SplitContext);
 
     const openModal = (transaction: Transaction) => {
         setSelectedTransaction(transaction);
@@ -44,16 +41,13 @@ export default function HistoryLayout({ historyRefresh }: HistoryLayoutProps) {
     const handleDeleteTransaction = async (transactionId: string) => {
         deleteTransactionById(transactionId).then(() => {
             closeModal();
-            setRefreshAtDelete((prevState) => !prevState);
+            updateSplit(split.id);
         });
     };
 
     useEffect(() => {
-        if (id)
-            findAllTransactions(id).then((result) => {
-                setTransactions(result);
-            });
-    }, [id, historyRefresh, refreshAtDelete]);
+        setTransactions(split.transactions);
+    }, [split]);
 
     const formatDate = (rawDate: string | number | Date) => {
         const formattedDate = new Date(rawDate);
@@ -66,7 +60,7 @@ export default function HistoryLayout({ historyRefresh }: HistoryLayoutProps) {
     const isTransactionEmpty = transactions && transactions.length === 0;
 
     return (
-        <div className={`flex w-full flex-col ${isTransactionEmpty ? 'justify-center' : ''} gap-[20px] bg-slate-50 rounded-lg border border-light-gray p-10`}>
+        <div className={`flex w-full flex-col ${isTransactionEmpty ? 'justify-center' : ''} gap-[20px] rounded-lg border border-light-gray bg-slate-50 p-10`}>
             <div className="flex flex-col">
                 {isTransactionEmpty ? (
                     <p className="text-center text-gray-400">No transactions yet!</p>
@@ -78,8 +72,10 @@ export default function HistoryLayout({ historyRefresh }: HistoryLayoutProps) {
                             title={transaction.title}
                             amount={transaction.amount}
                             date={formatDate(transaction.created_at)}
-                            author={transaction.payedBy?.display_name ? transaction.payedBy?.display_name : transaction.payedBy?.email || ''}
-                            onClick={() => openModal(transaction)}
+                            author={transaction.payedBy?.display_name ? transaction.payedBy?.display_name : transaction.payedBy?.email}
+                            onClick={() => {
+                                openModal(transaction);
+                            }}
                         />
                     ))
                 )}
@@ -92,6 +88,7 @@ export default function HistoryLayout({ historyRefresh }: HistoryLayoutProps) {
                     amount={selectedTransaction.amount}
                     date={formatDate(selectedTransaction.created_at)}
                     author={selectedTransaction.payedBy?.display_name ? selectedTransaction.payedBy?.display_name : selectedTransaction.payedBy?.email || ''}
+                    payedFor={selectedTransaction.payedFor ? selectedTransaction.payedFor : []}
                     textLeftButton="Close"
                     textRightButton="Delete"
                     onClickLeftButton={closeModal}

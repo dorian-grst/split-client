@@ -34,7 +34,7 @@ export default function MemberLayout({ additionalClass }: MemberLayoutProps) {
             <div className="flex flex-col gap-[10px]">
                 {split.members ? (
                     split.members.map((member) => (
-                        <h3 key={member.id} className={`hover:text-green-linear font-medium ${member.id == user.id ? 'text-purple-linear' : 'text-gray'}`}>
+                        <h3 key={member.id} className={`hover:text-green-linear truncate font-medium ${member.id == user.id ? 'text-purple-linear' : 'text-gray'}`}>
                             {member.display_name || member.email}
                         </h3>
                     ))

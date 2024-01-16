@@ -17,10 +17,8 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
     const [openJoinSplitModal, setJoinSplitModal] = useState(false);
     const [openCreateSplitModal, setCreateSplitModal] = useState(false);
     const [groupName, setGroupName] = useState('');
-    const [refreshSplitDropdown, setRefreshSplitDropdown] = useState(false);
-    // const [refreshSplitList, setRefreshSplitList] = useState(false);
     const { id } = useParams();
-    const { setSplit } = useContext(SplitContext);
+    const { split, setSplit, updateSplit } = useContext(SplitContext);
     const navigate = useNavigate();
 
     const links = [
@@ -39,7 +37,6 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
     const handleJoinSplitClick = () => {
         joinSplit(joinSplitToken).then(() => {
             setJoinSplitModal(false);
-            // setRefreshSplitList((prevState) => !prevState);
         });
     };
 
@@ -49,7 +46,7 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
 
     const handleCreateSplitClick = () => {
         createSplit(groupName).then(async (data) => {
-            setRefreshSplitDropdown((prevState) => !prevState);
+            updateSplit(split.id);
             setCreateSplitModal(false);
             setGroupName('');
             const splitInfo = await findSplitById(data.split.id);
@@ -74,7 +71,7 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
                             <img src={logo} alt="logo" />
                             <h2 className="font-bold">SPL!T</h2>
                         </Link>
-                        {!dashboard && <SplitDropdown onJoinSplitClick={() => setJoinSplitModal(true)} onCreateSplitClick={() => setCreateSplitModal(true)} refresh={refreshSplitDropdown} />}
+                        {!dashboard && <SplitDropdown onJoinSplitClick={() => setJoinSplitModal(true)} onCreateSplitClick={() => setCreateSplitModal(true)} />}
                     </div>
                     <div className="flex flex-row items-center justify-center gap-10">
                         {!dashboard && <NotificationDropdown />}

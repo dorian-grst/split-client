@@ -6,21 +6,17 @@ import { Member, SplitContext } from '@/context/SplitProvider';
 import { createTransaction } from '@/queries/split.queries';
 import { useContext, useState } from 'react';
 
-interface LeftMenuLayoutProps {
-    refreshHistory?: () => void;
-}
-
 interface TransactionData {
     title: string;
     amount: string;
     splitId: string;
     payedById?: string;
-    payedForIds: string[];
+    usersIds: string[];
 }
 
-export default function LeftMenuLayout({ refreshHistory }: LeftMenuLayoutProps) {
+export default function LeftMenuLayout({}) {
     const [openCreateTransactionModal, setOpenCreateTransactionModal] = useState(false);
-    const { split } = useContext(SplitContext);
+    const { split, updateSplit } = useContext(SplitContext);
     const [selectedMember, setSelectedMember] = useState<Member | undefined>(split?.members?.[0]);
 
     const openCreateTransactionModalHandler = () => {
@@ -45,14 +41,14 @@ export default function LeftMenuLayout({ refreshHistory }: LeftMenuLayoutProps) 
             amount: amount ?? '',
             splitId: split.id,
             payedById: selected?.id ?? '',
-            payedForIds: payedForMembers.map((member) => member?.id ?? ''),
+            usersIds: payedForMembers.map((member) => member?.id ?? ''),
         };
 
         createTransaction(data)
             .then(() => {
                 setOpenCreateTransactionModal(false);
                 setSelectedMember(selected);
-                if (refreshHistory) refreshHistory();
+                updateSplit(split.id);
             })
             .catch((error) => {
                 console.log(error.response.data);

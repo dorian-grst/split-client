@@ -1,3 +1,4 @@
+import { Transaction } from '@/components/layout/HistoryLayout';
 import { findSplitById } from '@/queries/split.queries';
 import { PropsWithChildren, createContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -15,7 +16,7 @@ interface Split {
     description: string;
     owner: string;
     members: Member[];
-    transactions: string[];
+    transactions: Transaction[];
 }
 
 export const defaultSplit: Split = {
@@ -30,35 +31,35 @@ export const defaultSplit: Split = {
 export const SplitContext = createContext<{
     split: Split;
     setSplit: (split: Split) => void;
+    updateSplit: (split_id: string) => void;
 }>({
     split: defaultSplit,
     setSplit: () => {},
+    updateSplit: () => {},
 });
 
 export default function SplitProvider({ children }: PropsWithChildren<{}>) {
     const [split, setSplit] = useState<Split>(defaultSplit);
-    const { id } = useParams();
+    const params = useParams();
+
+    const updateSplit = (split_id: string) => {
+        findSplitById(split_id).then((response) => {
+            console.log(response);
+            setSplit({
+                id: response[0].id,
+                display_name: response[0].display_name,
+                description: response[0].description,
+                owner: response[0].owner_id,
+                members: response[0].users,
+                transactions: response[0].transactions,
+            });
+        });
+    };
 
     useEffect(() => {
-        async function fetchSplitInfos() {
-            if (id) {
-                try {
-                    const splitInfo = await findSplitById(id);
-                    setSplit({
-                        id: splitInfo[0].id,
-                        display_name: splitInfo[0].display_name,
-                        description: splitInfo[0].description,
-                        owner: splitInfo[0].owner_id,
-                        members: splitInfo[0].users,
-                        transactions: splitInfo[0].transactions,
-                    });
-                } catch (error) {
-                    console.error('Error fetching split information:', error);
-                }
-            }
-        }
-        fetchSplitInfos();
-    }, []);
+        if (params.id === undefined) return;
+        updateSplit(params.id);
+    }, [params]);
 
-    return <SplitContext.Provider value={{ split, setSplit }}>{children}</SplitContext.Provider>;
+    return <SplitContext.Provider value={{ split, setSplit, updateSplit }}>{children}</SplitContext.Provider>;
 }
