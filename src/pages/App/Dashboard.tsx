@@ -5,7 +5,7 @@ import { SplitContext } from '@/context/SplitProvider';
 import { createNotification, createSplit, findSplitById, joinSplit } from '@/queries/split.queries';
 import { getAllSplitUsers } from '@/queries/user.queries';
 import { SetStateAction, useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface Split {
     id: string;
@@ -25,7 +25,6 @@ export default function Dashboard() {
     const [refreshSplitList, setRefreshSplitList] = useState(false);
     const [response, setResponse] = useState<{ splits: Split[] }>({ splits: [] });
     const { user } = useContext(AuthContext);
-    const { id } = useParams();
     const { setSplit } = useContext(SplitContext);
     const navigate = useNavigate();
 

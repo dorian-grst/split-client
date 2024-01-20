@@ -18,7 +18,6 @@ interface TransactionData {
 export default function Expenses() {
     const [openCreateTransactionModal, setOpenCreateTransactionModal] = useState(false);
     const { split, updateSplit } = useContext(SplitContext);
-    const [selectedMember, setSelectedMember] = useState<Member | undefined>(split?.members?.[0]);
 
     const openCreateTransactionModalHandler = () => {
         setOpenCreateTransactionModal(true);
@@ -48,7 +47,6 @@ export default function Expenses() {
         createTransaction(data)
             .then(() => {
                 setOpenCreateTransactionModal(false);
-                setSelectedMember(selected);
                 updateSplit(split.id);
             })
             .catch((error) => {
@@ -76,7 +74,6 @@ export default function Expenses() {
                     onClickRightButton={(selected: Member | undefined) => {
                         onCreateSplit(selected);
                     }}
-                    selected={selectedMember}
                 />
             )}
         </>

@@ -47,7 +47,7 @@ export default function BasicModal({
                         <button onClick={onClickLeftButton} className="cancel">
                             {textLeftButton}
                         </button>
-                        <button ref={completeButtonRef} onClick={onClickRightButton} className="next">
+                        <button ref={completeButtonRef} onClick={onClickRightButton} className="next bg-gray-900">
                             {textRightButton}
                         </button>
                     </div>

@@ -111,7 +111,7 @@ export default function AddModal({ isOpen, setIsOpen, title, titleClass, label, 
                             {textLeftButton}
                         </button>
                         {textRightButton && (
-                            <button onClick={onClickRightButton} className="next">
+                            <button onClick={onClickRightButton} className="next bg-gray-900">
                                 {textRightButton}
                             </button>
                         )}

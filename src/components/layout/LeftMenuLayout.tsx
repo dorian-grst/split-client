@@ -14,10 +14,9 @@ interface TransactionData {
     usersIds: string[];
 }
 
-export default function LeftMenuLayout({}) {
+export default function LeftMenuLayout() {
     const [openCreateTransactionModal, setOpenCreateTransactionModal] = useState(false);
     const { split, updateSplit } = useContext(SplitContext);
-    const [selectedMember, setSelectedMember] = useState<Member | undefined>(split?.members?.[0]);
 
     const openCreateTransactionModalHandler = () => {
         setOpenCreateTransactionModal(true);
@@ -47,7 +46,6 @@ export default function LeftMenuLayout({}) {
         createTransaction(data)
             .then(() => {
                 setOpenCreateTransactionModal(false);
-                setSelectedMember(selected);
                 updateSplit(split.id);
             })
             .catch((error) => {
@@ -72,7 +70,6 @@ export default function LeftMenuLayout({}) {
                     onClickRightButton={(selected: Member | undefined) => {
                         onCreateSplit(selected);
                     }}
-                    selected={selectedMember}
                 />
             )}
         </div>

@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon, ChevronUpDownIcon, PlusIcon } from '@heroicons/react/20/solid';
+import { ChevronUpDownIcon, PlusIcon } from '@heroicons/react/20/solid';
 import { FingerPrintIcon } from '@heroicons/react/24/outline';
 import ButtonDropdown from '@/components/dropdown/ButtonDropdown';
 import { Menu, Transition } from '@headlessui/react';

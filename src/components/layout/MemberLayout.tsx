@@ -25,7 +25,7 @@ export default function MemberLayout({ additionalClass }: MemberLayoutProps) {
             <div className="flex flex-row items-center justify-between">
                 <h3 className="font-semibold text-gray-950">Members</h3>
                 {split.members && split.members.length > 0 && (
-                    <button onClick={openAddModalHandler} className="next font-medium">
+                    <button onClick={openAddModalHandler} className="next bg-gray-900 font-medium">
                         Add
                     </button>
                 )}

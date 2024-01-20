@@ -18,7 +18,7 @@ export default function BasicSetting({ title, rule, children, textButton, border
             </div>
             <div className={`flex flex-row items-center justify-between rounded-b-lg p-8 ${backgroundColor}`}>
                 <p>{rule}</p>
-                <button onClick={onClick} className={`next ${buttonColor}`}>
+                <button onClick={onClick} className={`next bg-gray-900 ${buttonColor}`}>
                     {textButton}
                 </button>
             </div>
