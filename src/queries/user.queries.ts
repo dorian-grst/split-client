@@ -42,3 +42,16 @@ export const getAllSplitUsers = async (userId: string) => {
         console.error(error);
     }
 };
+
+export const deleteAccount = async (userId: string) => {
+    try {
+        const response = await axios.delete(VITE_API_ENDPOINT + '/v1/user/' + userId + '/delete', {
+            withCredentials: true,
+        });
+        toast.success('Account deleted!');
+        console.log(response.data);
+    } catch (error) {
+        toast.error('An error occured while deleting your account.');
+        console.error(error);
+    }
+}

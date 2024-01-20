@@ -47,7 +47,6 @@ export default function Dashboard() {
                 userId: user.id,
                 splitId: response.split[0].id,
             };
-            console.log(response);
             createNotification(data);
         });
     };
