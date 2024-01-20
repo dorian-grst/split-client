@@ -51,7 +51,7 @@ export default function SignUp() {
         <>
             <AuthNavbar to="/login" buttonText="Log in" />
             <div className="flex h-screen w-full flex-col items-center justify-center gap-9 bg-abstract bg-cover bg-no-repeat">
-                <div className="flex flex-col items-center justify-center gap-9 rounded-xl bg-slate-50 bg-opacity-40 p-8 backdrop-blur-sm">
+                <div className="flex flex-col items-center justify-center gap-9 rounded-xl bg-slate-50 bg-opacity-40 p-4 sm:p-8 backdrop-blur-sm">
                     <h1 className="text-slate-50">Sign up to SPL!T</h1>
                     <form className="flex flex-col gap-4" method="POST" onSubmit={handleSubmit(onSubmit as any)}>
                         <div className="text-bold flex flex-col gap-2">

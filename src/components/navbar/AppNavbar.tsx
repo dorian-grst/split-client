@@ -64,16 +64,16 @@ export default function AppNavbar({ section, dashboard }: AppNavbarProps) {
 
     return (
         <div className="px-[5%] md:px-[20%] xl:px-[30%]">
-            <div className="flex flex-col justify-between gap-7 border-b border-light-gray bg-slate-50 py-7">
+            <div className="flex flex-col justify-between gap-7 border-b border-light-gray bg-slate-50 py-7 sticky top-0">
                 <div className="flex flex-row justify-between">
-                    <div className="flex flex-row items-center justify-center gap-10">
+                    <div className="flex flex-row items-center justify-center gap-5 sm:gap-10">
                         <Link to="/" className="flex items-center justify-center gap-[10px]">
                             <img src={logo} alt="logo" />
                             <h2 className="font-bold">SPL!T</h2>
                         </Link>
                         {!dashboard && <SplitDropdown onJoinSplitClick={() => setJoinSplitModal(true)} onCreateSplitClick={() => setCreateSplitModal(true)} />}
                     </div>
-                    <div className="flex flex-row items-center justify-center gap-10">
+                    <div className="flex flex-row items-center justify-center gap-5 sm:gap-10">
                         {!dashboard && <NotificationDropdown />}
                         <ProfileDropdown onJoinSplitClick={() => setJoinSplitModal(true)} onCreateSplitClick={() => setCreateSplitModal(true)} />
                     </div>

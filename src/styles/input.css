@@ -18,6 +18,7 @@
     @apply p-3;
     @apply rounded-lg;
     @apply sm:min-w-[400px];
+    @apply w-full;
     @apply focus:border-gray-950;
     @apply hover:border-gray-950;
 

@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 interface Split {
     id: string;
     display_name: string;
+    description: string;
     members: string[];
 }
 
@@ -81,14 +82,14 @@ export default function Dashboard() {
 
             <div className="bg-slate-50 px-[5%] py-10 md:px-[20%] xl:px-[30%]">
                 <div className="flex w-full flex-col gap-10 rounded-lg border border-light-gray p-10">
-                    <div className="flex flex-row items-center justify-between">
+                    <div className="flex sm:flex-row flex-col items-start gap-10 sm:items-center justify-between">
                         <h3 className="text-center text-gray-950">{response.splits.length === 0 ? 'No Split yet !' : 'Choose a split !'}</h3>
                         <div className="flex flex-row gap-5">
                             <button className="text-purple-linear rounded-md border border-purple-primary px-3 py-2" onClick={() => setCreateSplitModal(true)}>
-                                Create Split
+                                Create
                             </button>
                             <button className="text-green-linear rounded-md border border-green-primary px-3 py-2" onClick={() => setJoinSplitModal(true)}>
-                                Join Split
+                                Join
                             </button>
                         </div>
                     </div>
@@ -110,10 +111,12 @@ export default function Dashboard() {
                                 navigate('/splits/' + splitItem.id);
                             }}
                         >
-                            <div className="flex flex-row items-center justify-start gap-10" key={splitItem.id}>
-                                <div className="h-[64px] w-[64px] rounded-full bg-abstract bg-cover bg-no-repeat focus:outline-none"></div>
-                                <h3 className="text-gray-950">{splitItem.display_name}</h3>
-                                <h4>{/* Ajoutez ici le contenu que vous souhaitez afficher pour chaque splitItem */}</h4>
+                            <div className="flex flex-col items-start justify-center gap-5" key={splitItem.id}>
+                                <div className="flex flex-row items-center justify-start gap-10">
+                                    <div className="h-[32px] w-[32px] rounded-full bg-abstract bg-cover bg-no-repeat focus:outline-none sm:h-[64px] sm:w-[64px]"></div>
+                                    <h3 className="text-gray-950 font-medium">{splitItem.display_name}</h3>
+                                </div>
+                                {splitItem.description && <h4 className="text-gray-950">{splitItem.description}</h4>}
                             </div>
                         </button>
                     ))}

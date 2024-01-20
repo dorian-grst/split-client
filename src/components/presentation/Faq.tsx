@@ -12,7 +12,7 @@ interface FaqProps {
 
 export default function Faq({ questionList }: FaqProps) {
     return (
-        <div className="w-full px-4 pb-64 pt-16 max-w-[80%]">
+        <div className="w-full lg:px-4 pb-64 lg:pt-16 lg:max-w-[80%]">
             <div className="flex w-full flex-col gap-2 rounded-2xl bg-gray-800 p-2">
                 {questionList.map(({ question, answer }, index) => (
                     <Disclosure key={index} as="div">
