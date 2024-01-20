@@ -248,7 +248,7 @@ export default function Home() {
                         <a href="https://ratathune.fr/" target='_blank' className="text-slate-50 hover:underline">
                             ratathune.fr
                         </a>
-                        <a href="" target='_blank' className="text-slate-50 hover:underline">
+                        <a href="https://polybank.fr/" target='_blank' className="text-slate-50 hover:underline">
                             polybank.fr
                         </a>
                         <a href="https://duratm.com/" target='_blank' className="text-slate-50 hover:underline">
