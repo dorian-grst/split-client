@@ -44,12 +44,12 @@ export default function NotificationDropdown() {
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
             >
-                <Menu.Items className="absolute right-0 flex w-min flex-col rounded-lg border border-light-gray bg-slate-50 p-2">
+                <Menu.Items className="absolute right-0 flex w-min flex-col rounded-lg border border-light-gray bg-slate-50 p-2 min-w-[250px]">
                     {hasNotifications ? (
                         notifications.map((notification, index) => (
                             <Menu.Item key={index}>
                                 <AlertDropdown
-                                    text={notification.user.display_name ? notification.user.display_name : notification.user.email + ' a rejoint le split !'}
+                                    text={notification.user.display_name ? notification.user.display_name + ' a rejoint le split !' : notification.user.email + ' a rejoint le split !'}
                                     onClick={() => {
                                         deleteNotificationById(notification.id).then(() => {
                                             setRefresh((prev) => !prev);
