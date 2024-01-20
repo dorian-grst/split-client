@@ -197,3 +197,29 @@ export const joinSplit = async (token: string) => {
         console.error(error);
     }
 };
+
+export const leaveSplit = async (splitId: string) => {
+    try {
+        const response = await axios.delete(VITE_API_ENDPOINT + '/v1/split/' + splitId + '/leave', {
+            withCredentials: true,
+        });
+        toast.success('Split left successfully');
+        return response.data;
+    } catch (error) {
+        toast.error('Error leaving split');
+        console.error(error);
+    }
+}
+
+export const deleteSplit = async (splitId: string) => {
+    try {
+        const response = await axios.delete(VITE_API_ENDPOINT + '/v1/split/' + splitId + '/delete', {
+            withCredentials: true,
+        });
+        toast.success('Split deleted successfully');
+        return response.data;
+    } catch (error) {
+        toast.error('Error deleting split');
+        console.error(error);
+    }
+}
