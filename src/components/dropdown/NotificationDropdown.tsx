@@ -44,7 +44,7 @@ export default function NotificationDropdown() {
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
             >
-                <Menu.Items className="absolute right-0 flex w-min min-w-[200px] max-w-[200px] lg:min-w-[300px] lg:max-w-[300px] flex-col rounded-lg border border-light-gray bg-slate-50 p-2">
+                <Menu.Items className="absolute right-0 flex w-min flex-col rounded-lg border border-light-gray bg-slate-50 p-2">
                     {hasNotifications ? (
                         notifications.map((notification, index) => (
                             <Menu.Item key={index}>
