@@ -76,7 +76,6 @@
     @apply px-3;
     @apply py-2;
     @apply text-slate-50;
-    @apply bg-gray-900;
     @apply transition;
     @apply duration-300;
     @apply hover:bg-gray-950;
@@ -105,7 +104,6 @@
     @apply rounded-lg;
     @apply h-12;
     @apply text-slate-50;
-    @apply bg-gray-900;
     @apply hover:bg-gray-950;
     @apply rounded-md;
     @apply leading-none;

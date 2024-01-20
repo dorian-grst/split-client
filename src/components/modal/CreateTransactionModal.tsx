@@ -9,12 +9,11 @@ interface CreateTransactionModalProps {
     setIsOpen: (value: boolean) => void;
     textLeftButton: string;
     textRightButton: string;
-    selected: Member | undefined;
     onClickLeftButton?: () => void;
     onClickRightButton: (selected: Member | undefined) => void; // Mettez à jour la signature
 }
 
-export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButton, textRightButton, selected: selectedValue, onClickLeftButton, onClickRightButton }: CreateTransactionModalProps) {
+export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButton, textRightButton, onClickLeftButton, onClickRightButton }: CreateTransactionModalProps) {
     const { split } = useContext(SplitContext);
     const [selected, setSelected] = useState<Member | undefined>(split?.members?.[0]);
 
@@ -46,9 +45,9 @@ export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButt
                                         <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
                                             {split?.members && split.members.length > 0 && (
                                                 <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-slate-50 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-                                                    {split?.members.map((member, idx) => (
+                                                    {split?.members.map((member) => (
                                                         <Listbox.Option
-                                                            key={idx}
+                                                            key={member.id}
                                                             className={({ active }) =>
                                                                 `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-green-100 text-green-500' : 'text-gray-900'}`
                                                             }
@@ -92,7 +91,7 @@ export default function CreateTransactionModal({ isOpen, setIsOpen, textLeftButt
                             <button onClick={onClickLeftButton} className="cancel">
                                 {textLeftButton}
                             </button>
-                            <button type="submit" className="next">
+                            <button type="submit" className="next bg-gray-900">
                                 {textRightButton}
                             </button>
                         </div>

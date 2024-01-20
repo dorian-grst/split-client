@@ -65,7 +65,7 @@ export default function Login() {
                             <input {...register('password')} placeholder="Password" type="password" className="auth-input" />
                             <div className="invalid-feedback font-bold text-red-500">{errors.password?.message}</div>
                         </div>
-                        <button type="submit" className="auth-submit-button">
+                        <button type="submit" className="auth-submit-button bg-gray-900">
                             <h3>Connexion</h3>
                         </button>
                     </form>

@@ -3,7 +3,6 @@ import { SplitContext } from "@/context/SplitProvider";
 import { useContext, useEffect, useState } from "react";
 
 export default function DetailLayout({ row = false }: { row?: boolean }) {
-    const [transactions, setTransactions] = useState<any[]>([]);
     const [totalCost, setTotalCost] = useState<number>(0);
     const [totalExpense, setTotalExpense] = useState<number>(0);
     const flexDirectionClass = row ? 'flex-row gap-10' : 'flex-col gap-[10px]';
@@ -26,7 +25,6 @@ export default function DetailLayout({ row = false }: { row?: boolean }) {
                 0
             );
 
-            setTransactions(split.transactions);
             setTotalCost(costForUser);
             setTotalExpense(expense);
         }

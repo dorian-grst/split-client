@@ -4,12 +4,9 @@ import '@/styles/input.css';
 import AuthNavbar from '@/components/navbar/AuthNavbar';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useContext } from 'react';
-import { AuthContext } from '@/context/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { getUserInfos } from '@/queries/user.queries';
 import toast from 'react-hot-toast';
 
 const VITE_API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
@@ -22,7 +19,6 @@ type UserSubmitForm = {
 
 export default function SignUp() {
     const navigate = useNavigate();
-    const { setUser } = useContext(AuthContext);
     const validationSchema = Yup.object().shape({
         email: Yup.string().required('Email is required').email('Email is invalid'),
         password: Yup.string().required('Password is required').min(8, 'Password must be at least 8 characters'),
@@ -36,20 +32,20 @@ export default function SignUp() {
         resolver: yupResolver(validationSchema),
     });
 
-    const onSubmit = (data: UserSubmitForm) => {
-        axios
-            .post(VITE_API_ENDPOINT + '/v1/auth/signup', data, {
-                withCredentials: true,
-            })
-            .then(async () => {
-                navigate('/login');
-                toast.success('Account created');
-            })
-            .catch((error) => {
-                console.log(error.response.data);
-                toast.error('Error during signup');
-            });
-    };
+        const onSubmit = (data: UserSubmitForm) => {
+            axios
+                .post(VITE_API_ENDPOINT + '/v1/auth/signup', data, {
+                    withCredentials: true,
+                })
+                .then(async () => {
+                    navigate('/login');
+                    toast.success('Account created');
+                })
+                .catch((error) => {
+                    console.log(error.response.data);
+                    toast.error('Error during signup');
+                });
+        };
 
     return (
         <>
@@ -57,7 +53,7 @@ export default function SignUp() {
             <div className="flex h-screen w-full flex-col items-center justify-center gap-9 bg-abstract bg-cover bg-no-repeat">
                 <div className="flex flex-col items-center justify-center gap-9 rounded-xl bg-slate-50 bg-opacity-40 p-8 backdrop-blur-sm">
                     <h1 className="text-slate-50">Sign up to SPL!T</h1>
-                    <form className="flex flex-col gap-4" method="POST" onSubmit={handleSubmit(onSubmit)}>
+                    <form className="flex flex-col gap-4" method="POST" onSubmit={handleSubmit(onSubmit as any)}>
                         <div className="text-bold flex flex-col gap-2">
                             <input {...register('email')} placeholder="Email address" type="text" className="auth-input" />
                             <div className="invalid-feedback font-bold text-red-500">{errors.email?.message}</div>
@@ -70,7 +66,7 @@ export default function SignUp() {
                             <input {...register('password_confirmation')} placeholder="Confirm password" type="password" className="auth-input" />
                             <div className="invalid-feedback font-bold text-red-500">{errors.password_confirmation?.message}</div>
                         </div>
-                        <button type="submit" className="auth-submit-button">
+                        <button type="submit" className="auth-submit-button bg-gray-900">
                             <h3>Create account</h3>
                         </button>
                     </form>

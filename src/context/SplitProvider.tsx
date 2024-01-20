@@ -44,7 +44,6 @@ export default function SplitProvider({ children }: PropsWithChildren<{}>) {
 
     const updateSplit = (split_id: string) => {
         findSplitById(split_id).then((response) => {
-            console.log(response);
             setSplit({
                 id: response[0].id,
                 display_name: response[0].display_name,
