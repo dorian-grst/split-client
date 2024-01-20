@@ -45,8 +45,7 @@ export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick }: 
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
             >
-                <Menu.Items className="absolute min-w-[300px] left-0 flex w-min flex-col rounded-lg border border-light-gray bg-slate-50">
-                
+                <Menu.Items className="absolute left-0 flex w-min min-w-[200px] max-w-[200px] flex-col rounded-lg border border-light-gray bg-slate-50 sm:min-w-[250px] sm:max-w-[250px]">
                     <Menu.Items className="flex flex-col px-2 pb-2 pt-4">
                         <Menu.Item>
                             <h3 className="px-3 pb-2 font-bold">Teams</h3>
@@ -67,7 +66,7 @@ export default function SplitDropdown({ onJoinSplitClick, onCreateSplitClick }: 
                                         });
                                         navigate('/splits/' + splitItem.id);
                                     }}
-                                    additionalClasses="flex w-full flex-row items-center justify-between gap-4"
+                                    additionalClasses="flex truncate w-full flex-row items-center justify-between gap-4"
                                 />
                             </Menu.Item>
                         ))}

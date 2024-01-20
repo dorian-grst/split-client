@@ -35,11 +35,11 @@ export default function DetailLayout({ row = false }: { row?: boolean }) {
             <h3 className="font-semibold text-gray-950">Details</h3>
             <div className={`flex ${flexDirectionClass}`}>
                 <div className="whitespace-nowrap">
-                    <h1 className="text-gray-950 font-bold">{totalCost} €</h1>
+                    <h1 className="text-gray-950 font-bold truncate">{totalCost} €</h1>
                     <p className="text-gray-950 font-medium">My total cost</p>
                 </div>
                 <div className="whitespace-nowrap">
-                    <h1 className="text-gray-950 font-bold">{totalExpense} €</h1>
+                    <h1 className="text-gray-950 font-bold truncate">{totalExpense} €</h1>
                     <p className="text-gray-950 font-medium">Total of expense</p>
                 </div>
             </div>

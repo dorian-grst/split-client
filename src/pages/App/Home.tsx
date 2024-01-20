@@ -54,15 +54,15 @@ const advantagesLeft = [
     { text: 'Manage your expenses', released: true },
     { text: 'Visualize your expenses', released: true },
     { text: 'Explore your expenses', released: true },
-    { text: 'Invite friends', released: false },
+    { text: 'Invite friends', released: true },
 ];
 
 const advantagesRight = [
+    { text: 'Delete a transaction', released: true },
     { text: 'Compare your expenses', released: true },
     { text: 'Modify your profile picture', released: false },
     { text: 'Modify your split profile picture', released: false },
     { text: 'Remove a member from your split', released: false },
-    { text: 'Delete a transaction', released: false },
     { text: 'Search a split in your dropdown', released: false },
 ];
 
@@ -89,14 +89,14 @@ const questionList = [
     },
     {
         question: 'Who are the most handsome in the class?',
-        answer: 'The most handsome individuals in the class are Nathael Bonnal, Mathias Durat, Tristan Radulescu, and not to forget the esteemed professor Christophe Nauroy.',
+        answer: 'The most handsome individuals in the class are Nathael Bonnal, Mathias Durat, Tristan Radulescu, Hugo Ponthieu and not to forget the esteemed professor Christophe Nauroy.',
     },
 ];
 
 export default function Home() {
     return (
         <div className="relative z-10 flex h-full w-full items-center justify-center scroll-smooth bg-gray-900">
-            <div className="absolute left-0 top-0 -z-10 h-screen w-full bg-abstract bg-cover bg-no-repeat"></div>
+            <div className="absolute left-0 top-0 -z-10 lg:h-screen h-[80vh] w-full bg-abstract bg-cover bg-no-repeat"></div>
             <ScrollLink activeClass="active" smooth spy to="main" className="fixed bottom-8 right-8 cursor-pointer rounded-full bg-slate-50 p-2 mix-blend-difference">
                 <ChevronDoubleUpIcon className="h-8 w-8 text-gray-950" />
             </ScrollLink>
@@ -107,7 +107,7 @@ export default function Home() {
                             <nav className="rounded-full border border-slate-50 px-6 py-3">
                                 <ul className="flex flex-row gap-6">
                                     {navItems.map((item, index) => (
-                                        <li key={index}>
+                                        <li key={index} className={`${item.text === 'Details' ? 'hidden lg:block' : ''}`}>
                                             <ScrollLink activeClass="active" smooth spy to={item.link}>
                                                 <h3 className="cursor-pointer text-slate-50">{item.text}</h3>
                                             </ScrollLink>
@@ -123,17 +123,17 @@ export default function Home() {
                             <img src={logo} alt="logo" className="h-[60px] w-[60px]" />
                             <h1 className="text-6xl text-slate-50">SPL!T</h1>
                         </div>
-                        <h3 className="pb-16 text-slate-50">The ultimate tool for sharing your activity expenses</h3>
+                        <h3 className="pb-16 text-slate-50 max-w-[80%] text-center">The ultimate tool for sharing your activity expenses</h3>
                         <RouterLink className="flex flex-row items-center justify-center gap-2 rounded-lg border border-slate-50 px-6 py-4 text-slate-50" to={'/signup'}>
                             <h3>Register now</h3> <ChevronDoubleRightIcon className="h-4 w-4" />
                         </RouterLink>
-                        <img src={app} alt="app" className="pt-8" />
+                        <img src={app} alt="app" className="pt-8 hidden lg:block" />
                     </div>
                 </section>
 
-                <section id="features" className="py-32">
-                    <div className="flex flex-col items-center justify-center gap-24 ">
-                        <div className="flex flex-row gap-4">
+                <section id="features" className="lg:py-32 pb-32 pt-64">
+                    <div className="flex flex-col items-center justify-center gap-24">
+                        <div className="flex lg:flex-row flex-col text-center lg:gap-4">
                             <h1 className="text-6xl text-slate-50">SPL!T's main</h1>
                             <h1 className="text-purple-linear text-6xl">features</h1>
                         </div>
@@ -145,7 +145,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section id="details" className="py-32">
+                <section id="details" className="py-32 hidden lg:block">
                     <div className="flex flex-row items-center justify-center gap-12 px-12">
                         <div className="flex flex-col items-center justify-center gap-12">
                             <h2 className="text-4xl font-semibold text-slate-50">Manage expenses with friends effortlessly using SPL!T: create, invite, and share!</h2>
@@ -167,7 +167,7 @@ export default function Home() {
                         <div className="flex flex-col items-center justify-center gap-12">
                             <Details
                                 number={'1.'}
-                                title={'Open Source Foundation'}
+                                title={'Open Source'}
                                 description={
                                     'SPL!T is built on an open-source foundation, fostering a collaborative environment for continuous improvement. Our commitment to transparency allows developers worldwide to contribute, ensuring a robust and secure platform. Embracing the spirit of open source enables us to evolve rapidly, driven by a community dedicated to enhancing the user experience and expanding functionality.'
                                 }
@@ -185,14 +185,14 @@ export default function Home() {
 
                 <section id="pricing" className="py-32">
                     <div className="flex flex-col items-center justify-center gap-24">
-                        <div className="flex flex-row flex-wrap justify-center gap-4 whitespace-nowrap">
+                        <div className="flex flex-row flex-wrap justify-center gap-4 lg:whitespace-nowrap text-center">
                             <h1 className=" text-6xl text-slate-50">One application,</h1>
                             <h1 className="text-purple-linear text-6xl">many</h1>
                             <h1 className="text-6xl text-slate-50">advantages</h1>
                         </div>
                         <div className="flex flex-col gap-16 rounded-2xl bg-gray-800 p-8">
                             <h2 className="font-bold text-slate-50">SPL!T</h2>
-                            <div className="flex flex-row gap-32">
+                            <div className="flex sm:flex-row flex-col gap-6 sm:gap-32">
                                 <div className="flex flex-col items-start justify-center gap-6">
                                     {advantagesLeft.map((advantage, index) => (
                                         <Advantages key={index} text={advantage.text} released={advantage.released} />
@@ -217,7 +217,7 @@ export default function Home() {
 
                 <section id="faq" className="pt-32">
                     <div className="flex flex-col items-center justify-center gap-24">
-                        <div className="flex flex-row flex-wrap justify-center gap-4 whitespace-nowrap">
+                        <div className="flex flex-row flex-wrap justify-center gap-4 lg:whitespace-nowrap text-center">
                             <h1 className=" text-6xl text-slate-50">We've got</h1>
                             <h1 className="text-purple-linear text-6xl">answers</h1>
                             <h1 className="text-6xl text-slate-50">to your questions</h1>
@@ -226,7 +226,7 @@ export default function Home() {
                     </div>
                 </section>
                 <footer className="flex w-full flex-row justify-between">
-                    <section className="flex flex-col px-48 py-24">
+                    <section className="flex flex-col py-24">
                         <p className="font-bold text-slate-50">
                             Made with ♡ by{' '}
                             <a href="https://www.instagram.com/rapidement/" className="text-warn font-bold hover:underline">
@@ -240,16 +240,22 @@ export default function Home() {
                             Privacy policy
                         </RouterLink>
                     </section>
-                    <section className="flex flex-col px-48 py-24 text-right">
+                    <section className="flex flex-col py-24 text-right">
                         <p className="font-bold text-slate-50">Alternatives</p>
-                        <a href="" className="text-slate-50 hover:underline">
+                        <a href="https://www.tricount.com/" target='_blank' className="text-slate-50 hover:underline">
                             tricount.com
                         </a>
-                        <a href="" className="text-slate-50 hover:underline">
+                        <a href="https://ratathune.fr/" target='_blank' className="text-slate-50 hover:underline">
                             ratathune.fr
                         </a>
-                        <a href="" className="text-slate-50 hover:underline">
+                        <a href="" target='_blank' className="text-slate-50 hover:underline">
                             polybank.fr
+                        </a>
+                        <a href="https://duratm.com/" target='_blank' className="text-slate-50 hover:underline">
+                            pycount.fr
+                        </a>
+                        <a href="https://tricount.hponthieu.com/" target='_blank' className="text-slate-50 hover:underline">
+                            tricount.hponthieu.com
                         </a>
                     </section>
                 </footer>

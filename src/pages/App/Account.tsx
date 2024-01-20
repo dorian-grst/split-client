@@ -30,7 +30,7 @@ export default function Account() {
                         <InputGroupModal value={newDisplayName} label="This is your visible display name." placeholder="Rapidement" onChange={handleDisplayNameChange} />
                     </BasicSetting>
                     <BasicSetting title="Delete account" textButton="Delete Account" borderColor="border-red-500" buttonColor="bg-red-600" backgroundColor="bg-red-100">
-                        <p className="text-gray-950">Permanently remove your Team and all of its contents from the platform. This action is not reversible — please continue with caution.</p>
+                        <p className="text-gray-950">Permanently remove your account and all of its contents from the platform. This action is not reversible.</p>
                     </BasicSetting>
                 </div>
             </div>

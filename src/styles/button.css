@@ -41,7 +41,7 @@
     @apply border-light-gray;
     @apply hover:border-gray-950;
     @apply p-3;
-    @apply min-w-[400px];
+    @apply min-w-[200px];
     @apply w-full;
     @apply transition;
     @apply duration-300;

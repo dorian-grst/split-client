@@ -52,7 +52,7 @@ export default function Settings() {
                         />
                     </BasicSetting>
                     <BasicSetting title={'Delete split'} textButton="Delete Split" borderColor="border-red-500" buttonColor="bg-red-600" backgroundColor="bg-red-100">
-                        <p className="text-gray-950">Permanently remove your Team and all of its contents from the Vercel platform. This action is not reversible — please continue with caution.</p>
+                        <p className="text-gray-950">Permanently remove your split and all of its contents from the platform. This action is not reversible.</p>
                     </BasicSetting>
                 </div>
             </div>

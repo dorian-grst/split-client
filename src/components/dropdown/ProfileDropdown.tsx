@@ -55,8 +55,8 @@ export default function ProfileDropdown({ onJoinSplitClick, onCreateSplitClick }
     ];
 
     return (
-        <Menu as="div" className="relative flex items-center justify-center">
-            <Menu.Button className="h-[28px] w-[28px] rounded-full bg-abstract bg-cover bg-no-repeat hover:border-slate-300 hover:border-2" />
+        <Menu as="div" className="relative">
+            <Menu.Button className="h-[28px] w-[28px] rounded-full bg-abstract bg-cover bg-no-repeat hover:border-slate-300 hover:border-2 flex" />
             <Transition
                 enter="transition duration-100 ease-out"
                 enterFrom="transform scale-95 opacity-0"
@@ -65,9 +65,9 @@ export default function ProfileDropdown({ onJoinSplitClick, onCreateSplitClick }
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
             >
-                <Menu.Items className="absolute right-0 top-8 flex w-min flex-col rounded-lg border border-light-gray bg-slate-50 px-2 pb-2 pt-4">
+                <Menu.Items className="absolute right-0 flex w-min min-w-[200px] max-w-[200px] lg:min-w-[300px] lg:max-w-[300px] flex-col rounded-lg border border-light-gray bg-slate-50 px-2 pb-2 pt-4">
                     <Menu.Item>
-                        <h3 className="px-3 pb-2 font-medium text-gray-950">{user.email}</h3>
+                        <h3 className="px-3 pb-2 font-medium text-gray-950 truncate">{user.email}</h3>
                     </Menu.Item>
                     {menuButtons.map((button, index) => (
                         <Menu.Item key={index}>
