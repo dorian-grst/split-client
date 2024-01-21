@@ -54,7 +54,7 @@ Then, go on your browser at this URL :
 http://127.0.0.1:<frontend-port>
 ```
 
-> ⚠️ Don't try to launch with `localhost:<frontend-port>``, the connection to the application won't work (I don't know why 😓).
+> ⚠️ Don't try to launch with `localhost:<frontend-port>`, the connection to the application won't work (I don't know why 😓).
 
 ## Technical Document Architecture
 
