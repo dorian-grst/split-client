@@ -1,30 +1,63 @@
-# React + TypeScript + Vite
+<h1>
+<img align="center" src="https://split.backtothe.cloud/assets/white_logo-65UcD7d6.svg" height="24px"/>
+SPL!T
+</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**SPL!T** is a [tricount](https://www.tricount.com/) clone developed in [React](https://react.dev/) and [AdonisJS](https://adonisjs.com/). Simplify sharing expenses between friends with a user-friendly and secure interface with SPL!T.
 
-Currently, two official plugins are available:
+## Access to the online project
+&rarr; [SPL!T](https://split.backtothe.cloud) &larr;
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Launch the project locally
 
-## Expanding the ESLint configuration
+### 1. Front-end
+```bash
+$ git clone https://github.com/dorian-grst/split-client.git
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+$ cd split-client
 
-- Configure the top-level `parserOptions` property like this:
+$ npm install
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+$ npm run dev
+```
+### 2. Back-end
+```bash
+$ git clone https://github.com/dorian-grst/split-server.git
+
+$ cd split-server
+```
+Afterward, generate a .env file and input the following values as your environment variables:
+```
+PORT=3333
+HOST=0.0.0.0
+NODE_ENV=development
+APP_KEY=<app-key>
+DRIVE_DISK=local
+DB_CONNECTION=pg
+PG_HOST=localhost
+PG_PORT=5432
+PG_USER=postgres
+PG_PASSWORD=postgres
+PG_DB_NAME=woa
+```
+Subsequently, return to your terminal and execute the following commands:
+```bash
+$ docker compose up -d
+
+$ node ace migration:run
+
+$ npm run dev
+```
+Then, go on your browser at this URL :
+
+```bash
+http://127.0.0.1:<frontend-port>
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+> ⚠️ Don't try to launch with `localhost:<frontend-port>``, the connection to the application won't work (I don't know why 😓).
+
+## Technical Document Architecture
+
+You can find my TDA in this repository : `Architecture.md`
+
+**Good job ! ✨**
