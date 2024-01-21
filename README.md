@@ -25,6 +25,8 @@ $ npm run dev
 $ git clone https://github.com/dorian-grst/split-server.git
 
 $ cd split-server
+
+$ npm install
 ```
 Afterward, generate a .env file and input the following values as your environment variables:
 ```
